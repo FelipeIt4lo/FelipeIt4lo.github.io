@@ -1,0 +1,35 @@
+section.skills {
+    padding: 40px 1%;
+}
+
+section.skills .flex {
+    gap: 60px;
+}
+
+.skills .skills-box {
+    color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 45px;
+    transition: 0.2s;
+}
+
+.skills .skills-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px #ffffffa9;
+}
+
+.skills .skills-box i {
+    font-size: 70px;
+    color: #38e1ff;
+}
+
+.skills .skills-box h3 {
+    font-size: 25px;
+    margin: 15px 0px;
+}
+
+.skills .skills-box p {
+    text-align: left;
+    display: flex;
+}

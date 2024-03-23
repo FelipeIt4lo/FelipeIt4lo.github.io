@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+}
+
+.interface {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.btn-contato button {
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #38e1ff;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.myself {
+    border: 0;
+    border-radius: 300px;
+    box-shadow: 0px 0px 40px #00b7ffbd;
+}
+
+.myself2 {
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 0px 0px 20px #ffffff9a;
+}
+
+h2.titulo {
+    color: white;
+    font-size: 38px;
+    text-align: center;
+}
+
+h2.titulo span {
+    color: #38e1ff;
+}
+
+button:hover,
+form .btn-send input:hover {
+    box-shadow: 0px 0px 8px #38e1ff;
+    transform: scale(1.1);
+}
+
+
