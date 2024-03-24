@@ -1,0 +1,91 @@
+@media screen and (max-width: 1020px) {
+    /* classes gerais */
+    .flex {
+        flex-direction: column;
+    }
+
+    h2.titulo {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    /* cabecalho */
+    .menu-desktop,
+    .btn-contato {
+        display: none;
+    }
+
+    /* sobre mim */
+
+    .about .img-about img {
+        width: 100%;
+        height: 100%;
+    }
+
+    section.about {
+        padding: 80px 8%;
+    }
+
+    .about .txt-about h2 {
+        font-size: 32px;
+        line-height: 35px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .btn-social {
+        text-align: center;
+    }
+
+    /* topo do site */
+
+    .top-of-the-site h1 {
+        font-size: 30px;
+    }
+
+    section.top-of-the-site .flex {
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* skills */
+
+    section.skills .flex {
+        gap: 40px;
+        padding: 0px 8%;
+    }
+
+    /* portfolio */
+
+    section.portfolio {
+        padding: 80px 8%;
+    }
+
+    .img-port {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    section.portfolio .flex {
+        gap: 50px;
+    }
+
+    /* rodape */
+
+    footer .flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    footer .line-footer {
+        text-align: center;
+    }
+
+    footer .flex {
+        padding: 20px;
+    }
+
+
+}
