@@ -1,0 +1,956 @@
+/* GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-image: url("/images/background.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: -1;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.interface {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+.flex {
+    display: flex;
+}
+
+h2.titulo {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2.titulo::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #38e1ff;
+    margin: 10px auto 0;
+    border-radius: 5px;
+}
+
+h2.titulo span {
+    color: #38e1ff;
+}
+
+button:hover,
+form .btn-send input:hover {
+    box-shadow: 0px 0px 15px #38e1ff;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+/* BOTÕES GERAIS */
+.btn-contato button,
+.btn-curriculo button,
+form .btn-send input {
+    padding: 12px 35px;
+    font-size: 1.1em;
+    font-weight: 600;
+    background-color: #38e1ff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #000;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 35px;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-curriculo {
+    text-align: center;
+    float: none;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/* CABEÇALHO (HEADER) */
+header {
+    padding: 20px 4%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+}
+
+header > .interface {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+header a {
+    color: #f0f0f0;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+header nav.menu-desktop a:hover {
+    color: #38e1ff;
+    transform: translateY(-3px);
+    padding-bottom: 5px;
+}
+
+header nav ul {
+    list-style-type: none;
+}
+
+header nav.menu-desktop ul li {
+    display: inline-block;
+    padding: 0 25px;
+}
+
+/* Estilo para link de navegação ativo (Scroll Spy) */
+header nav.menu-desktop ul li a.active {
+    color: #38e1ff;
+    font-weight: 700;
+    border-bottom: 2px solid #38e1ff;
+    padding-bottom: 3px;
+    transform: translateY(0);
+}
+
+/* ESTILO MENU MOBILE */
+.btn-open-menu i {
+    color: #38e1ff;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.menu-mobile {
+    background-color: rgba(0, 0, 0, 0.95);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99999;
+    width: 0%;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
+}
+
+.menu-mobile.op-menu {
+    width: 70%;
+}
+
+.menu-mobile.op-menu ~ .overlay-menu {
+    display: block;
+    opacity: 1;
+}
+
+.menu-mobile .btn-close {
+    padding: 20px 5%;
+    text-align: right;
+}
+
+.menu-mobile .btn-close i {
+    color: #38e1ff;
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.menu-mobile .btn-close i:hover {
+    transform: rotate(90deg);
+}
+
+.menu-mobile nav ul {
+    text-align: right;
+    padding-top: 50px;
+}
+
+.menu-mobile nav ul li a {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 300;
+    padding: 15px 8%;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-mobile nav ul li:last-child a {
+    border-bottom: none;
+}
+
+.menu-mobile nav ul li a:hover,
+.menu-mobile nav ul li a.active {
+    background-color: #38e1ff;
+    color: #000;
+    padding-bottom: 15px;
+}
+
+.overlay-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 88888;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* TOPO DO SITE (HERO SECTION) */
+section.top-of-the-site {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    padding-top: 120px;
+}
+
+.overlay-hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+.top-of-the-site .interface {
+    position: relative;
+    z-index: 2;
+    padding: 40px 4%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-of-the-site .flex {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    width: 100%;
+    max-width: 900px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.top-of-the-site .txt-top-site {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+.top-of-the-site .txt-top-site h1 {
+    font-size: 4.5em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.top-of-the-site .txt-top-site h1 span {
+    color: #38e1ff;
+}
+
+.top-of-the-site .txt-top-site p {
+    font-size: 1.3em;
+    line-height: 1.6;
+    margin: 20px auto 0;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+main section:first-of-type {
+    margin-bottom: 80px;
+    padding-bottom: 50px;
+}
+
+.top-of-the-site .img-top-site {
+    display: none;
+}
+
+/* SKILLS */
+section.skills {
+    padding: 80px 4%;
+    background-color: rgba(0, 0, 0, 0.45);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+section.skills .flex {
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.skills .skills-box {
+    background-color: #1a1a3a;
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    flex-basis: calc(33.33% - 20px);
+    max-width: 380px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgba(56, 225, 255, 0.2);
+}
+
+.skills .skills-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 30px rgba(56, 225, 255, 0.3);
+    background-color: #2b2b50;
+    border-color: #38e1ff;
+}
+
+.skills .flex .skills-box i {
+    font-size: 4.5em;
+    color: #38e1ff;
+    margin-bottom: 20px;
+}
+
+.skills .skills-box h3 {
+    font-size: 1.6em;
+    margin: 10px 0 15px;
+    font-weight: 600;
+}
+
+.rowicon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.rowicon i {
+    font-size: 4.5em;
+    margin-bottom: 0;
+}
+
+.skills .skills-box p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* PORTFÓLIO (PROJECTS) */
+section.portfolio {
+    padding: 80px 4%;
+    box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.45);
+    margin-top: 50px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+section.portfolio .flex {
+    /* Esta classe é para esconder a estrutura antiga */
+    display: none;
+}
+
+/* Estilos do Swiper Container */
+.swiper {
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    transition: z-index 0s, transform 0.3s ease;
+}
+
+.swiper-slide:hover {
+    z-index: 10;
+}
+
+.img-port {
+    width: 320px;
+    height: 420px;
+    background-color: #2a2a5a;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+    cursor: grab;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Sombra externa padrão mais sutil */
+    overflow: hidden; /* Mantemos overflow: hidden para cortar a imagem de fundo */
+    outline: none;
+    border: none; /* Garante que não haja borda aqui */
+}
+
+/* Pseudo-elemento para criar a borda e sombra com blur no hover */
+.img-port::after {
+    content: "";
+    position: absolute;
+    top: -8px; /* Aumenta a distância para a borda do .img-port para acomodar o blur */
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 4px solid transparent; /* Borda transparente inicial */
+    border-radius: 28px; /* Raio da borda maior para acompanhar o blur */
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transições suaves */
+    pointer-events: none; /* Não interfere com cliques */
+    z-index: 5; /* Fica acima do .img-port */
+    transform: scale(0.95); /* Começa ligeiramente menor */
+    /* Box-shadow inicial transparente */
+    box-shadow: 0 0 0 0 transparent;
+}
+
+.img-port:hover {
+    transform: scale(1.03); /* Mantém o zoom sutil no próprio cartão */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8); /* Sombra do cartão mais escura */
+}
+
+/* Ajusta o pseudo-elemento no hover do .img-port */
+.img-port:hover::after {
+    opacity: 1; /* Torna o pseudo-elemento visível */
+    transform: scale(1); /* Volta ao tamanho normal */
+    border-color: #38e1ff; /* A borda azul vibrante aparece no hover */
+    /* Box-shadow com blur forte e cor vibrante */
+    box-shadow: 0 0 25px 10px rgba(56, 225, 255, 0.8),
+        /* Sombra luminosa principal com mais blur */ 0 0 50px 20px
+            rgba(56, 225, 255, 0.6); /* Sombra externa com ainda mais blur para o glow */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #38e1ff;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+    z-index: 6;
+}
+
+.overlay:hover {
+    opacity: 1;
+}
+
+/* Estilos para a Paginação (bolinhas) e Navegação (setas) do Swiper */
+.swiper-pagination-bullet {
+    background: #38e1ff;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #38e1ff;
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #38e1ff;
+    background-color: transparent !important; /* FORÇA O FUNDO A SER TRANSPARENTE */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* SOBRE MIM (ABOUT) */
+section.about {
+    padding: 100px 4%;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.45);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+section.about .flex {
+    align-items: center;
+    gap: 80px;
+    justify-content: center;
+}
+
+.about .img-about {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.about .img-about img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #38e1ff;
+    box-shadow: 0px 0px 60px rgba(56, 225, 255, 0.5);
+    transition: all 0.5s ease;
+}
+.about .img-about img:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow: 0px 0px 80px rgba(56, 225, 255, 0.7);
+}
+
+.about .txt-about {
+    color: #fff;
+    max-width: 600px;
+}
+
+.about .txt-about h2 {
+    font-size: 3em;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.about .txt-about h2 span {
+    color: #38e1ff;
+    display: inline;
+}
+
+.about .txt-about p {
+    margin: 15px 0;
+    text-align: justify;
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #e0e0e0;
+}
+
+.btn-social {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-social .social-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #38e1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    line-height: 1;
+    overflow: hidden;
+    outline: none !important;
+}
+
+.btn-social .social-icon i {
+    line-height: 1;
+    vertical-align: middle;
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.btn-social .social-icon:hover {
+    background-color: #2ac5eb;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(56, 225, 255, 0.5);
+    border: none;
+    text-decoration: none;
+}
+
+/* CONTATO */
+section.contactme {
+    padding: 80px 4%;
+    background-color: rgba(0, 0, 0, 0.45);
+    margin-top: 50px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+    padding: 25px;
+    background-color: #1a1a3a;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(56, 225, 255, 0.2);
+}
+
+form input,
+form textarea {
+    width: 100%;
+    background-color: #0f0f2f;
+    border: 1px solid #38e1ff;
+    outline: none;
+    padding: 18px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.05em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+    color: #aaa;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(56, 225, 255, 0.5);
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 120px;
+    max-height: 300px;
+}
+
+form .btn-send {
+    margin-top: 25px;
+    text-align: center;
+}
+
+form .btn-send input {
+    width: 150px;
+    background-color: #38e1ff;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+/* RODAPÉ (FOOTER) */
+footer {
+    padding: 40px 4%;
+    box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.08);
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 15px;
+}
+
+footer .flex {
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .logo-footer img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+footer .line-footer {
+    padding: 15px 0%;
+    text-align: center;
+}
+
+.borda {
+    border-top: 1px solid rgba(56, 225, 255, 0.5);
+    margin-top: 20px;
+}
+
+footer .line-footer p i {
+    color: #38e1ff;
+    font-size: 1.3em;
+    margin-right: 8px;
+}
+
+footer .line-footer p a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+footer .line-footer p a:hover {
+    color: #38e1ff;
+}
+
+/* RESPONSIVIDADE */
+@media screen and (max-width: 1020px) {
+    .flex {
+        flex-direction: column;
+    }
+
+    /* GERAIS */
+    h2.titulo {
+        font-size: 2.5em;
+        margin-bottom: 40px;
+    }
+    h2.titulo::after {
+        width: 50px;
+    }
+
+    /* CABEÇALHO */
+    .menu-desktop,
+    .btn-contato {
+        display: none;
+    }
+    header {
+        padding: 15px 4%;
+    }
+
+    /* TOPO DO SITE */
+    section.top-of-the-site {
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 4% 80px;
+    }
+    .top-of-the-site .flex {
+        gap: 20px;
+    }
+    .top-of-the-site .txt-top-site h1 {
+        font-size: 2.8em;
+    }
+    .top-of-the-site .txt-top-site p {
+        font-size: 1em;
+        margin: 15px auto 20px;
+    }
+    .top-of-the-site .btn-group {
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .top-of-the-site .interface {
+        padding: 0;
+    }
+
+    /* SKILLS */
+    section.skills {
+        padding: 60px 8%;
+    }
+    section.skills .flex {
+        gap: 30px;
+    }
+    .skills .skills-box {
+        flex-basis: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .skills .skills-box:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    /* SOBRE MIM */
+    section.about {
+        padding: 60px 8%;
+    }
+    section.about .flex {
+        gap: 40px;
+    }
+    .about .img-about img {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 20px;
+    }
+    .about .txt-about h2 {
+        font-size: 2.5em;
+        text-align: center;
+    }
+    .about .txt-about p {
+        text-align: center;
+    }
+    .btn-social {
+        justify-content: center;
+    }
+
+    /* PORTFÓLIO */
+    section.portfolio {
+        padding: 60px 8%;
+    }
+    section.portfolio .flex {
+        gap: 40px;
+    }
+    .img-port {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    /* CONTATO */
+    section.contactme {
+        padding: 60px 8%;
+    }
+    form {
+        padding: 20px;
+    }
+
+    /* RODAPÉ */
+    footer .flex {
+        flex-direction: column;
+        gap: 20px;
+    }
+    footer .line-footer {
+        text-align: center;
+    }
+    footer .logo-footer {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* GERAIS */
+    h2.titulo {
+        font-size: 2em;
+    }
+
+    /* TOPO DO SITE */
+    .top-of-the-site .txt-top-site h1 {
+        font-size: 2.2em;
+    }
+    .top-of-the-site .txt-top-site p {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* GERAIS */
+    h2.titulo {
+        font-size: 1.8em;
+    }
+
+    /* TOPO DO SITE */
+    .top-of-the-site .txt-top-site h1 {
+        font-size: 1.8em;
+    }
+    .top-of-the-site .btn-curriculo button {
+        padding: 10px 25px;
+        font-size: 0.95em;
+    }
+
+    /* SKILLS */
+    .skills .skills-box {
+        padding: 25px;
+    }
+    .skills .flex .skills-box i,
+    .rowicon i {
+        font-size: 3.5em;
+    }
+    .skills .skills-box h3 {
+        font-size: 1.4em;
+    }
+
+    /* SOBRE MIM */
+    .about .img-about img {
+        width: 200px;
+        height: 200px;
+    }
+    .about .txt-about h2 {
+        font-size: 2em;
+    }
+    .about .txt-about p {
+        font-size: 0.9em;
+    }
+    .btn-social button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
+    }
+
+    /* CONTATO */
+    form input,
+    form textarea {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+    form .btn-send input {
+        width: 130px;
+        font-size: 1em;
+    }
+}
