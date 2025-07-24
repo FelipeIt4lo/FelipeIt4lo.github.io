@@ -133,40 +133,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Swiper.js Initialization for Projects Carousel ---
     const swiper = new Swiper(".mySwiper", {
-        // Optional parameters
-        direction: "horizontal", // 'horizontal' ou 'vertical'
-        loop: true, // Loop infinito do carrossel
-
-        // Configura o número de slides por visualização
-        slidesPerView: 1, // Padrão: 1 slide visível
-        spaceBetween: 30, // Espaçamento entre os slides (em pixels)
-
-        // If we need pagination (bolinhas)
+        direction: "horizontal",
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
         pagination: {
             el: ".swiper-pagination",
-            clickable: true, // Permite clicar nas bolinhas para navegar
+            clickable: true,
         },
-
-        // Navigation arrows (setas)
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
-
-        // Autoplay (opcional: faz o carrossel avançar automaticamente)
         autoplay: {
-            delay: 4000, // 4 segundos
-            disableOnInteraction: false, // Não para o autoplay se o usuário interagir
+            delay: 4000,
+            disableOnInteraction: false,
         },
-
-        // Responsive breakpoints
         breakpoints: {
-            // when window width is >= 768px
             768: {
                 slidesPerView: 2,
                 spaceBetween: 40,
             },
-            // when window width is >= 1024px
             1024: {
                 slidesPerView: 3,
                 spaceBetween: 50,
@@ -186,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
             const phoneInput = contactForm.querySelector('input[name="Phone"]');
 
-            // Funções de validação e feedback
             const validateField = (input, message, condition) => {
                 if (!condition()) {
                     showValidationError(input, message);
@@ -196,14 +182,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Validação do Nome
             validateField(
                 nameInput,
                 "Please enter your name.",
                 () => nameInput.value.trim() !== ""
             );
 
-            // Validação do Email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             validateField(
                 emailInput,
@@ -211,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 () => emailInput.value.trim() !== ""
             );
             if (isValid && emailInput.value.trim() !== "") {
-                // Re-check if valid to prevent multiple errors
                 validateField(
                     emailInput,
                     "Please enter a valid email address.",
@@ -219,14 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            // Validação da Mensagem
             validateField(
                 messageInput,
                 "Please enter your message.",
                 () => messageInput.value.trim() !== ""
             );
 
-            // Validação Opcional do Telefone
             if (phoneInput.value.trim() !== "") {
                 validateField(
                     phoneInput,
@@ -237,16 +218,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         )
                 );
             } else {
-                hideValidationError(phoneInput); // Esconder erro se o campo opcional estiver vazio
+                hideValidationError(phoneInput);
             }
 
             if (!isValid) {
-                event.preventDefault(); // Impede o envio do formulário se houver erros
+                event.preventDefault();
             } else {
                 alert(
                     'Form submitted successfully! (Note: Actual email sending depends on your form\'s "action" attribute)'
                 );
-                // Opcional: contactForm.submit(); se a ação for para um backend
             }
         });
     }
@@ -256,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!errorSpan || !errorSpan.classList.contains("validation-error")) {
             errorSpan = document.createElement("span");
             errorSpan.classList.add("validation-error");
-            // Inserir antes do próximo irmão (ou no final se não houver)
             inputElement.parentNode.insertBefore(
                 errorSpan,
                 inputElement.nextSibling
@@ -266,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
         errorSpan.style.color = "#ff6b6b";
         errorSpan.style.fontSize = "0.85em";
         errorSpan.style.marginTop = "5px";
-        errorSpan.style.marginBottom = "5px"; // Adicionado para espaçamento
+        errorSpan.style.marginBottom = "5px";
         errorSpan.style.display = "block";
     }
 
@@ -277,39 +256,129 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- Light/Dark Mode Toggle (Implementação opcional) ---
-    // Você precisaria de um botão no HTML para isso, por exemplo:
-    // <button id="theme-toggle">Toggle Theme</button>
-    // E classes CSS para o tema escuro/claro, ex: body.light-theme { ... }
-    const themeToggleBtn = document.getElementById("theme-toggle"); // Adicione este ID a um botão no HTML
-    if (themeToggleBtn) {
-        const currentTheme = localStorage.getItem("theme")
-            ? localStorage.getItem("theme")
-            : null;
+    // --- Efeito de Digitação na Hero Section (Typewriter Effect) ---
+    const typingElement = document.querySelector(".txt-top-site h1");
+    const originalText =
+        "Learn more about who Felipe is and his passion for programming!";
+    let charIndex = 0;
+    const typingSpeed = 70; // Velocidade em ms por caractere
+    const deleteSpeed = 30; // Velocidade em ms para apagar
+    const delayBetweenTexts = 1000; // Atraso entre terminar de digitar e começar a apagar (ou reiniciar)
 
-        if (currentTheme) {
-            document.documentElement.setAttribute("data-theme", currentTheme); // Aplica o tema salvo
+    function typeWriterEffect() {
+        if (charIndex < originalText.length) {
+            typingElement.innerHTML += originalText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriterEffect, typingSpeed);
         } else {
-            // Detecta preferência do sistema, se não houver tema salvo
-            if (
-                window.matchMedia &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            ) {
-                document.documentElement.setAttribute("data-theme", "dark");
-            } else {
-                document.documentElement.setAttribute("data-theme", "light");
-            }
+            // Se o texto terminou de digitar, espere um pouco e então comece a apagar
+            setTimeout(eraseText, delayBetweenTexts);
         }
-
-        themeToggleBtn.addEventListener("click", () => {
-            let theme = document.documentElement.getAttribute("data-theme");
-            if (theme === "dark") {
-                document.documentElement.setAttribute("data-theme", "light");
-                localStorage.setItem("theme", "light");
-            } else {
-                document.documentElement.setAttribute("data-theme", "dark");
-                localStorage.setItem("theme", "dark");
-            }
-        });
     }
+
+    function eraseText() {
+        if (charIndex > 0) {
+            typingElement.innerHTML = originalText.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(eraseText, deleteSpeed);
+        } else {
+            // Se o texto foi completamente apagado, reinicie o efeito
+            typingElement.innerHTML = ""; // Garante que esteja vazio
+            charIndex = 0;
+            setTimeout(typeWriterEffect, typingSpeed);
+        }
+    }
+
+    // Iniciar o efeito de digitação após um pequeno delay para carregar a página
+    setTimeout(() => {
+        typingElement.innerHTML = ""; // Limpa o texto inicial para o efeito
+        typeWriterEffect();
+    }, 500); // Começa após 0.5 segundo
+
+    // --- Cursor Personalizado (Custom Cursor) ---
+    const cursor = document.createElement("div");
+    cursor.classList.add("custom-cursor");
+    document.body.appendChild(cursor);
+
+    document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    });
+
+    // Efeitos no cursor ao interagir com elementos clicáveis
+    document
+        .querySelectorAll(
+            "a, button, .img-port, .skills-box, .swiper-button-prev, .swiper-button-next, .swiper-pagination-bullet"
+        )
+        .forEach((el) => {
+            el.addEventListener("mouseenter", () => {
+                cursor.classList.add("grow");
+            });
+            el.addEventListener("mouseleave", () => {
+                cursor.classList.remove("grow");
+            });
+        });
+
+    // --- Efeito de "Tilt" nos Cards de Habilidades e Projetos (Simples com JS) ---
+    const tiltElements = document.querySelectorAll(".skills-box, .img-port");
+
+    tiltElements.forEach((el) => {
+        el.addEventListener("mousemove", (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element
+            const y = e.clientY - rect.top; // y position within the element
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10; // Ajuste o divisor para mais ou menos tilt
+            const rotateY = (centerX - x) / 10; // Ajuste o divisor
+
+            el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+        });
+
+        el.addEventListener("mouseleave", () => {
+            el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`; // Reset
+        });
+    });
+
+    // --- Contador Animado (Exemplo: para "Projetos Concluídos" ou "Anos de Experiência") ---
+    // Você precisaria de um elemento no HTML com uma classe específica, ex: <span class="counter" data-target="15">0</span>
+    // E garantir que ele esteja em uma seção observada pelo Scroll Spy ou que você crie um Observer específico
+    const counters = document.querySelectorAll(".counter");
+    const speed = 200; // The lower the speed, the faster the count
+
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        let current = 0;
+
+        const updateCount = () => {
+            const increment = target / speed;
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                setTimeout(updateCount, 1);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        updateCount();
+    };
+
+    // Usar Intersection Observer para animar quando o elemento estiver visível
+    const counterObserver = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        },
+        { threshold: 0.5 }
+    ); // Quando 50% do elemento estiver visível
+
+    counters.forEach((counter) => {
+        counterObserver.observe(counter);
+    });
 });
