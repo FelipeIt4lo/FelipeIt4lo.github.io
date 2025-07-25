@@ -137,18 +137,54 @@ header {
     background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
     box-shadow: 0 2px 10px var(--shadow-dark);
     backdrop-filter: blur(8px);
+    display: flex; /* Garante que o header seja um flex container */
+    align-items: center; /* Alinha itens verticalmente no centro */
+    justify-content: space-between; /* Espaço entre logo, menu e botão */
 }
 
 header > .interface {
-    display: flex;
+    display: flex; /* Garante que os filhos diretos da interface no header sejam flex */
     align-items: center;
     justify-content: space-between;
+    width: 100%; /* Ocupa a largura total da interface */
+}
+
+/* Ajuste específico para o botão de contato no cabeçalho */
+.btn-contato {
+    margin-left: auto; /* Empurra o botão para a direita */
+    display: block; /* Garante que ele seja visível */
+    align-self: center; /* Alinha ele no centro verticalmente */
+    flex-shrink: 0; /* Impede que o botão encolha */
+}
+
+header .logo {
+    flex-shrink: 0; /* Impede que o logo encolha */
+    margin-right: 20px; /* Espaço entre logo e menu */
 }
 
 header .logo img {
     width: 80px;
     height: 80px;
     object-fit: contain;
+}
+
+header nav.menu-desktop {
+    flex-grow: 1; /* Permite que o menu ocupe o espaço disponível */
+    text-align: center; /* Centraliza o texto do menu no espaço flex */
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex; /* Transforma a lista de links em flex (para desktop) */
+    justify-content: center; /* Centraliza os itens da lista */
+    align-items: center;
+    margin: 0; /* Remove margens padrão da ul */
+    padding: 0; /* Remove paddings padrão da ul */
+}
+
+header nav.menu-desktop ul li {
+    display: inline-block; /* Mantido para compatibilidade, mas o flex já faz o trabalho */
+    padding: 0 20px; /* Reduzido um pouco o padding entre os itens */
 }
 
 header a {
@@ -158,21 +194,13 @@ header a {
     transition: all 0.2s ease;
     font-weight: 500;
     padding-bottom: 5px;
+    white-space: nowrap; /* Evita que o texto do link quebre a linha */
 }
 
 header nav.menu-desktop a:hover {
     color: var(--accent-blue);
     transform: translateY(-3px);
     padding-bottom: 5px;
-}
-
-header nav ul {
-    list-style-type: none;
-}
-
-header nav.menu-desktop ul li {
-    display: inline-block;
-    padding: 0 25px;
 }
 
 /* Estilo para link de navegação ativo (Scroll Spy) */
@@ -185,6 +213,10 @@ header nav.menu-desktop ul li a.active {
 }
 
 /* ESTILO MENU MOBILE */
+.btn-open-menu {
+    /* Display padrão será 'block' em media query para mobile */
+    display: none; /* Escondido por padrão em desktop */
+}
 .btn-open-menu i {
     color: var(--accent-blue);
     font-size: 35px;
@@ -228,16 +260,28 @@ header nav.menu-desktop ul li a.active {
 }
 
 .menu-mobile nav ul {
-    text-align: right;
+    /* MUDANÇA CRUCIAL AQUI: Faz os itens ficarem verticais */
+    list-style-type: none; /* Garante que não tenha marcadores de lista */
+    display: flex; /* Ativa o flexbox */
+    flex-direction: column; /* ITENS FICAM UM ABAIXO DO OUTRO */
+    align-items: flex-end; /* Alinha os itens à direita no menu mobile */
+    text-align: right; /* Alinha o texto à direita */
     padding-top: 50px;
+    margin: 0; /* Remove margens padrão */
+    padding-right: 8%; /* Ajusta padding para o texto não colar na borda */
+}
+
+.menu-mobile nav ul li {
+    width: 100%; /* Faz com que cada item ocupe a largura total disponível */
+    margin-bottom: 10px; /* Espaço entre os itens */
 }
 
 .menu-mobile nav ul li a {
     color: var(--text-light);
     font-size: 1.2em;
     font-weight: 300;
-    padding: 15px 8%;
-    display: block;
+    padding: 10px 0; /* Ajusta padding para os itens verticais */
+    display: block; /* Ocupa a largura total do li */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -250,7 +294,7 @@ header nav.menu-desktop ul li a.active {
 .menu-mobile nav ul li a.active {
     background-color: var(--accent-blue);
     color: var(--bg-main);
-    padding-bottom: 15px;
+    padding-bottom: 10px; /* Mantém o padding consistente */
 }
 
 .overlay-menu {
@@ -418,6 +462,87 @@ section.skills .flex {
     line-height: 1.5;
     text-align: center;
     color: var(--text-mid);
+}
+
+/* NOVA SEÇÃO: EXPERIENCE */
+section.experience {
+    padding: 80px 4%;
+    background-color: var(--bg-section);
+    box-shadow: inset 0 0 20px var(--shadow-dark);
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+.experience-grid {
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.experience-card {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px var(--shadow-dark);
+    flex-basis: calc(50% - 20px); /* 2 colunas em telas maiores */
+    max-width: 580px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha texto à esquerda dentro do card */
+    text-align: left;
+    border: 1px solid var(--border-subtle);
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 30px var(--shadow-light);
+    background-color: var(--card-hover-bg);
+    border-color: var(--accent-blue);
+}
+
+.experience-icon {
+    font-size: 4em; /* Tamanho do ícone */
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+}
+
+.experience-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.experience-card .experience-company {
+    font-size: 1em;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+}
+
+.experience-card .experience-period,
+.experience-card .experience-location {
+    font-size: 0.85em;
+    color: var(--text-mid);
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.experience-card .experience-summary {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: var(--text-mid);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.experience-card .experience-skills {
+    font-size: 0.85em;
+    color: var(--accent-blue); /* Cor de destaque para skills */
+    font-weight: 500;
+    margin-top: 10px;
 }
 
 /* NOVA SEÇÃO: CERTIFICADOS */
@@ -588,13 +713,13 @@ section.education {
 .education-card .education-description {
     font-style: italic;
     margin-top: 5px;
-    color: var(--text-light); /* Descrição da formação */
+    color: var(--text-mid); /* Descrição da formação */
 }
 
 .education-card .education-skills {
     font-size: 0.85em;
     margin-top: 15px;
-    color: var(--text-mid);
+    color: var(--accent-blue);
 }
 
 /* PORTFÓLIO (PROJECTS) */
@@ -653,7 +778,7 @@ section.portfolio .flex {
     cursor: grab;
     border-radius: 20px;
     position: relative;
-    box-shadow: 0 8px 25px var(--shadow-dark); /* Sombra externa padrão mais sutil */
+    box-shadow: 0 8px 25px var(--shadow-dark); /* Sombra externa padrão sutil */
     overflow: hidden; /* Mantemos overflow: hidden para cortar a imagem de fundo */
     border: 4px solid transparent; /* Borda transparente inicial */
     filter: none; /* Garante que não haja filter no estado normal */
@@ -720,7 +845,6 @@ section.portfolio .flex {
     /* Transição para filter */
     transition: filter 0.3s ease, background-color 0.3s ease;
     z-index: 10;
-    /* FILTER: DROP-SHADOW INICIAL TRANSPARENTE para transição */
     filter: drop-shadow(0 0 0 transparent); /* Inicia sem glow */
     box-shadow: none; /* Garante que não haja box-shadow regular */
 }
@@ -728,9 +852,8 @@ section.portfolio .flex {
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
     background-color: rgba(0, 0, 0, 0.3); /* Fundo sutil ao hover */
-    filter: drop-shadow(0 0 10px rgba(56, 225, 255, 0.8))
-        /* Brilho neon mais forte */
-        drop-shadow(0 0 20px rgba(56, 225, 255, 0.6)); /* Brilho mais espalhado para halo */
+    filter: drop_shadow(0 0 10px rgba(56, 225, 255, 0.8))
+        drop_shadow(0 0 20px rgba(56, 225, 255, 0.6)); /* Brilho mais espalhado para halo */
     box-shadow: none; /* Garante que não haja box-shadow regular no hover das setas */
 }
 
@@ -1017,12 +1140,24 @@ footer .line-footer p a:hover {
     }
 
     /* CABEÇALHO */
-    .menu-desktop,
-    .btn-contato {
+    header nav.menu-desktop {
         display: none;
+    }
+    header .btn-contato {
+        /* Mantemos o botão visível em mobile */
+        display: block;
+        margin-left: auto; /* Empurra para a direita */
     }
     header {
         padding: 15px 4%;
+        justify-content: space-between; /* Ajusta para mobile para centralizar logo e menu-hamburguer */
+    }
+    .btn-open-menu {
+        display: block; /* Torna o botão de abrir menu visível no mobile */
+        margin-left: auto; /* Empurra para a direita */
+    }
+    header > .interface {
+        justify-content: space-between; /* Garante espaço entre logo e botão mobile */
     }
 
     /* TOPO DO SITE */
@@ -1086,6 +1221,59 @@ footer .line-footer p a:hover {
     }
     .btn-social {
         justify-content: center;
+    }
+
+    /* EXPERIENCE */
+    .experience-card {
+        flex-basis: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .experience-card:not(:last-child) {
+        margin-bottom: 20px;
+    }
+    .experience-card .experience-company,
+    .experience-card .experience-period,
+    .experience-card .experience-location,
+    .experience-card .experience-summary,
+    .experience-card .experience-skills {
+        text-align: center; /* Centraliza o texto no card em mobile */
+    }
+    .experience-card h3 {
+        text-align: center;
+        width: 100%;
+    }
+
+    /* CERTIFICADOS */
+    section.certificates {
+        padding: 60px 8%;
+    }
+    section.certificates .flex {
+        gap: 30px;
+    }
+    .certificate-card {
+        flex-basis: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .certificate-card:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    /* EDUCATION */
+    section.education {
+        padding: 60px 8%;
+    }
+    section.education .flex {
+        gap: 30px;
+    }
+    .education-card {
+        flex-basis: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    .education-card:not(:last-child) {
+        margin-bottom: 20px;
     }
 
     /* PORTFÓLIO */
