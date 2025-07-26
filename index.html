@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://unpkg.com/i18next/dist/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend/dist/i18nextHttpBackend.min.js"></script>
+    
     <link rel="stylesheet" href="src/styles/main.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <script src="https://kit.fontawesome.com/9d1f11e5ad.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <title>Felipe Ítalo - Developer</title>
+    <title data-i18n="pageTitle">Felipe Ítalo - Developer Portfolio</title>
 </head>
 <body id="home-top">
 
@@ -22,22 +27,37 @@
                 <a href="#home-top">
                     <img src="images/f-logo.png" alt="Felipe Italo Logo">
                 </a>
-            </div><nav class="menu-desktop">
+            </div>
+            <nav class="menu-desktop">
                 <ul>
-                    <li><a href="#home-top">Home</a></li>
-                    <li><a href="#about">About me</a></li> <li><a href="#skills">Skills</a></li>   <li><a href="#experience">Experience</a></li>
-                    <li><a href="#certificates">Certificates</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#home-top" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About Me</a></li>
+                    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                    <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+                    <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
+                    <li><a href="#education" data-i18n="nav.education">Education</a></li>
+                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
                 </ul>
             </nav>
 
-            <div class="btn-contato">
-                <a href="#contact">
-                    <button>Contact</button>
-                </a>
-            </div><div class="btn-open-menu" id="btn-menu">
-                <i class="fa-solid fa-bars"></i>
+            <div class="header-actions">
+                <div class="lang-selector">
+                    <button class="lang-button" type="button" aria-label="Language Selector">
+                        <i class="fas fa-globe" aria-hidden="true"></i> <span id="current-lang-text">EN</span> <i class="fas fa-caret-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="pt-br">Português (Brasil)</a>
+                    </div>
+                </div>
+                <div class="btn-contato">
+                    <a href="#contact">
+                        <button data-i18n="nav.contactButton">Contact</button>
+                    </a>
+                </div>
+                <div class="btn-open-menu" id="btn-menu">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
             </div>
 
             <div class="menu-mobile" id="menu-mobile">
@@ -47,17 +67,21 @@
 
                 <nav>
                     <ul>
-                        <li><a href="#home-top">Home</a></li>
-                        <li><a href="#about">About me</a></li> <li><a href="#skills">Skills</a></li>   <li><a href="#experience">Experience</a></li>
-                        <li><a href="#certificates">Certificates</a></li>
-                        <li><a href="#education">Education</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home-top" data-i18n="nav.home">Home</a></li>
+                        <li><a href="#about" data-i18n="nav.about">About Me</a></li>
+                        <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                        <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+                        <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
+                        <li><a href="#education" data-i18n="nav.education">Education</a></li>
+                        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
                     </ul>
                 </nav>
 
-            </div><div class="overlay-menu" id="overlay-menu"></div>
-        </div></header>
+            </div>
+            <div class="overlay-menu" id="overlay-menu"></div>
+        </div>
+    </header>
 
     <main id="main">
         <section class="top-of-the-site">
@@ -65,220 +89,261 @@
             <div class="interface">
                 <div class="flex">
                     <div class="txt-top-site" data-aos="fade-up" data-aos-duration="1200">
-                        <h1>Learn more about who Felipe is and his passion for programming<span>!</span></h1>
-                        <p>Welcome to my portfolio, I created this website with the intention of everyone who accesses it knowing a little more about my history, skills, and of course, a little about my personality and experience in the programming job market, I hope you like what I developed ,and I'm open to suggestions for improvements to my portfolio, I'll always be updating!</p>
+                        <h1 data-i18n="hero.title">Learn more about who Felipe is and his passion for programming<span>!</span></h1>
+                        <p data-i18n="hero.subtitle">Welcome to my portfolio! I designed this website to share my journey, skills, and experience in the programming job market. I hope you enjoy what I've developed. I'm always open to suggestions for improvements and will keep this portfolio updated!</p>
 
                         <div class="btn-group" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1200">
                             <div class="btn-curriculo">
-                                <a href="https://drive.google.com/file/d/1sPQmxjiMEgfsl4udjJB-jMZYQO2qkcjt/view?usp=sharing" target="_blank">
-                                    <button>See my CV (PT)</button>
+                                <a href="https://drive.google.com/file/d/1sPQmxjiMEgfsl4udjJB-j1s/view?usp=sharing" target="_blank">
+                                    <button data-i18n="hero.cvPt">See my CV (PT)</button>
                                 </a>
                             </div>
                             <div class="btn-curriculo">
                                 <a href="https://drive.google.com/file/d/1NzW9fja0SvILqFRxXE03lh54uedEcYUf/view?usp=sharing" target="_blank">
-                                    <button>See my CV (ENG)</button>
-                                </button>
-                            </a>
+                                    <button data-i18n="hero.cvEng">See my CV (ENG)</button>
+                                </a>
+                            </div>
                         </div>
-                        </div>
-                    </div></div></div></section><section class="about" id="about">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
             <div class="interface">
                 <div class="flex">
                     <div class="img-about" data-aos="fade-right" data-aos-duration="1200">
                         <img src="images/me.png" alt="Felipe Ítalo" class="myself2">
-                    </div><div class="txt-about" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
-                        <h2>Nice to meet you,<span> i'm Felipe Ítalo!</span></h2>
-                        <p>I'm Felipe Ítalo, 23 years old, a person with disabilities - PwD (PCD in portuguese) and passionate about technology. I have experience in the programming field and in IT infrastructure. In addition to having extensive experience in user support and operating various hardware and software, I believe I can be a valuable asset to the team in handling these technologies and associated programming!</p>
-                        <p>Currently, I have mainly studied Java and PL/SQL languages, however, I am always seeking more and more knowledge to improve my skills, in addition I have focused a lot on my vocation in English, as my mother language is Portuguese, I intend to achieve a level C2 fluency (fluent) in english, I currently have a C1 (advanced) certificate!</p>
+                    </div>
+                    <div class="txt-about" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                        <h2 data-i18n="about.title">Nice to meet you,<span> I'm Felipe Ítalo!</span></h2>
+                        <p data-i18n="about.p1">I'm Felipe Ítalo, 23 years old, and a person with disabilities (PwD) passionate about technology. I have experience in both programming and IT infrastructure. With extensive experience in user support and operating various hardware and software, I believe I can be a valuable asset to any team in handling these technologies and associated programming tasks!</p>
+                        <p data-i18n="about.p2">Currently, I am primarily focused on studying Java and PL/SQL. However, I continuously seek more knowledge to enhance my skills. Additionally, I've been diligently working on my English proficiency. As a native Portuguese speaker, my goal is to achieve a C2 (fluent) level in English, and I currently hold a C1 (advanced) certificate!</p>
                         <div class="btn-social" data-aos="fade-up" data-aos-delay="400">
-                            <a href="https://www.instagram.com/felipe_it4lo/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="https://github.com/FelipeIt4lo" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/felipeit4lo/" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/felipe_it4lo/" target="_blank" class="social-icon" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://github.com/FelipeIt4lo" target="_blank" class="social-icon" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/felipeit4lo/" target="_blank" class="social-icon" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
                         </div>
-                    </div></div></div></section><section class="skills" id="skills">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills" id="skills">
             <div class="interface">
-                 <h2 class="titulo" data-aos="fade-down">MY <span>SKILLS!</span></h2>
+                 <h2 class="titulo" data-i18n="skills.title" data-aos="fade-down">MY <span>SKILLS!</span></h2>
                  <div class="flex">
                     <div class="skills-box" data-aos="fade-up" data-aos-delay="100">
                         <i class="fa-brands fa-java"></i>
-                        <h3>JAVA</h3>
-                        <p>I currently work at IBM, where I have direct contact with the JAVA programming language.</p>
-                    </div><div class="skills-box" data-aos="fade-up" data-aos-delay="200">
+                        <h3 data-i18n="skills.java.title">JAVA</h3>
+                        <p data-i18n="skills.java.desc">I currently work at IBM, where I have direct contact and practical experience with the Java programming language.</p>
+                    </div>
+                    <div class="skills-box" data-aos="fade-up" data-aos-delay="200">
                         <i class="fa-solid fa-database"></i>
-                        <h3>SQL</h3>
-                        <p>At the Ministry of Justice, where I previously worked, I had contact with mySQL, and now at IBM, the contact has increased even more, and I am becoming more familiar with the Oracle language PL/SQL</p>
-                    </div><div class="skills-box" data-aos="fade-up" data-aos-delay="300">
-                        <div class="rowicon"><i class="fa-brands fa-js"></i>
-                        <i class="fa-brands fa-python"></i></div>
-                        <h3>JavaScript and Python</h3>
-                        <p>I have no formal experience using Javascript and Python, however, my studies are consistent and I have already set up projects using both languages to improve my repository as much as I can with these two languages.</p>
-                    </div><div class="skills-box" data-aos="fade-up" data-aos-delay="400">
+                        <h3 data-i18n="skills.sql.title">SQL</h3>
+                        <p data-i18n="skills.sql.desc">At the Ministry of Justice, my previous workplace, I gained experience with MySQL. Now at IBM, my exposure to databases has significantly increased, and I am becoming proficient in Oracle PL/SQL.</p>
+                    </div>
+                    <div class="skills-box" data-aos="fade-up" data-aos-delay="300">
                         <div class="rowicon">
-                        <i class="fa-brands fa-html5"></i>
-                        <i class="fa-brands fa-css3-alt"></i>
+                            <i class="fa-brands fa-js"></i>
+                            <i class="fa-brands fa-python"></i>
                         </div>
-                        <h3>Html5 and CSS3</h3>
-                        <p>I am also familiar with the HTML5 typing language and the CSS3 cascading language.</p>
-                    </div><div class="skills-box" data-aos="fade-up" data-aos-delay="500">
+                        <h3 data-i18n="skills.jsPython.title">JavaScript and Python</h3>
+                        <p data-i18n="skills.jsPython.desc">While I don't have formal professional experience with JavaScript and Python, I consistently study and have developed projects using both languages to enhance my personal repository and practical skills.</p>
+                    </div>
+                    <div class="skills-box" data-aos="fade-up" data-aos-delay="400">
+                        <div class="rowicon">
+                            <i class="fa-brands fa-html5"></i>
+                            <i class="fa-brands fa-css3-alt"></i>
+                        </div>
+                        <h3 data-i18n="skills.htmlCss.title">HTML5 and CSS3</h3>
+                        <p data-i18n="skills.htmlCss.desc">I am proficient in structuring web content with HTML5 and styling it effectively using CSS3, allowing me to build responsive and visually appealing user interfaces.</p>
+                    </div>
+                    <div class="skills-box" data-aos="fade-up" data-aos-delay="500">
                         <i class="fa-brands fa-linux"></i>
-                        <h3>Linux</h3>
-                        <p>I really like the Linux operating system, it has currently become my main use system after many years using Windows, I like learning how to use it and I focus my studies on improving more and more knowledge about this OS, my main focus is Ubuntu and also Redhat, recently acquired by IBM.</p>
-                    </div><div class="skills-box" data-aos="fade-up" data-aos-delay="600">
+                        <h3 data-i18n="skills.linux.title">Linux</h3>
+                        <p data-i18n="skills.linux.desc">I am very fond of the Linux operating system, which has become my primary system after years of using Windows. I enjoy learning about it and focusing my studies on continuously improving my knowledge of various Linux distributions, especially Ubuntu and Red Hat (recently acquired by IBM).</p>
+                    </div>
+                    <div class="skills-box" data-aos="fade-up" data-aos-delay="600">
                         <i class="bi bi-git"></i>
-                        <h3>Git and Github</h3>
-                        <p>At IBM I am also having the opportunity to improve my skills using git daily, more specifically the BitBucket system written in the Python language, which I use daily in my activities within IBM.</p>
-                    </div></div></div></section><section class="experience" id="experience">
+                        <h3 data-i18n="skills.gitGithub.title">Git and GitHub</h3>
+                        <p data-i18n="skills.gitGithub.desc">At IBM, I regularly use Git for version control, specifically with the Bitbucket system, which is built on Python. This daily practice has significantly enhanced my proficiency in collaborative development workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience" id="experience">
             <div class="interface">
-                <h2 class="titulo" data-aos="fade-down">MY <span>EXPERIENCE!</span></h2>
+                <h2 class="titulo" data-i18n="experience.title" data-aos="fade-down">MY <span>EXPERIENCE!</span></h2>
                 <div class="flex experience-grid">
                     <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
                         <i class="fa-solid fa-briefcase experience-icon"></i>
-                        <h3>Early Associate</h3>
-                        <p class="experience-company">IBM · Internship</p>
-                        <p class="experience-period">Feb 2024 - Present · 1 year 6 months</p>
-                        <p class="experience-location">Brasília, Federal District, Brazil · Remote</p>
-                        <p class="experience-summary">Currently an Application Developer at IBM, involved in a major project with Java, SQL, QA/Tester, Bitbucket/Git, PL/SQL, Oracle DB, IT consulting, project management, and client application support.</p>
-                        <p class="experience-skills">Skills: Programming, Oracle SQL Developer, QA/Tester, Bitbucket/Git, IT Consulting, Project Management.</p>
+                        <h3 data-i18n="experience.ibm.role">Early Associate</h3>
+                        <p class="experience-company" data-i18n="experience.ibm.company">IBM · Internship</p>
+                        <p class="experience-period" data-i18n="experience.ibm.period">Feb 2024 - Present · 1 year 6 months</p>
+                        <p class="experience-location" data-i18n="experience.ibm.location">Brasília, Federal District, Brazil · Remote</p>
+                        <p class="experience-summary" data-i18n="experience.ibm.summary">Currently an Application Developer at IBM, actively involved in a major project utilizing Java, SQL, QA/Tester methodologies, Bitbucket/Git for version control, PL/SQL, Oracle DB management, IT consulting, project management, and client application support.</p>
+                        <p class="experience-skills" data-i18n="experience.ibm.skills">Skills: Programming, Oracle SQL Developer, QA/Tester, Bitbucket/Git, IT Consulting, Project Management.</p>
                     </div>
                     <div class="experience-card" data-aos="fade-up" data-aos-delay="200">
                         <i class="fa-solid fa-laptop-file experience-icon"></i>
-                        <h3>IT Intern</h3>
-                        <p class="experience-company">Senac Brasil · Internship</p>
-                        <p class="experience-period">May 2023 - Jan 2024 · 9 months</p>
-                        <p class="experience-location">Brasília, Federal District, Brazil · On-site</p>
-                        <p class="experience-summary">Analyzed IT management reports, provided technical support to users regarding the appropriate use of tools, their functionality, and applicability. Assisted in the execution of IT infrastructure operational routines and also helped in controlling network and data security.</p>
-                        <p class="experience-skills">Skills: Network Infrastructure, Data Center Infrastructure, Technical Support, IT Reports.</p>
+                        <h3 data-i18n="experience.senac.role">IT Intern</h3>
+                        <p class="experience-company" data-i18n="experience.senac.company">Senac Brasil · Internship</p>
+                        <p class="experience-period" data-i18n="experience.senac.period">May 2023 - Jan 2024 · 9 months</p>
+                        <p class="experience-location" data-i18n="experience.senac.location">Brasília, Federal District, Brazil · On-site</p>
+                        <p class="experience-summary" data-i18n="experience.senac.summary">Analyzed IT management reports, provided technical support to users regarding appropriate tool usage, functionality, and applicability. Assisted in executing IT infrastructure operational routines and helped control network and data security.</p>
+                        <p class="experience-skills" data-i18n="experience.senac.skills">Skills: Network Infrastructure, Data Center Infrastructure, Technical Support, IT Reports.</p>
                     </div>
                     <div class="experience-card" data-aos="fade-up" data-aos-delay="300">
                         <i class="fa-solid fa-gavel experience-icon"></i>
-                        <h3>IT Intern</h3>
-                        <p class="experience-company">Ministry of Justice · Internship</p>
-                        <p class="experience-period">Dec 2022 - May 2023 · 6 months</p>
-                        <p class="experience-location">Brasília, Federal District, Brazil · On-site</p>
-                        <p class="experience-summary">Assisted in operating systems training, data registration in monitoring tools (Power BI), spreadsheets, and information insertion into proprietary databases.</p>
-                        <p class="experience-skills">Skills: SQL, MySQL, Power BI, Data Entry, Operating Systems.</p>
+                        <h3 data-i18n="experience.justice.role">IT Intern</h3>
+                        <p class="experience-company" data-i18n="experience.justice.company">Ministry of Justice · Internship</p>
+                        <p class="experience-period" data-i18n="experience.justice.period">Dec 2022 - May 2023 · 6 months</p>
+                        <p class="experience-location" data-i18n="experience.justice.location">Brasília, Federal District, Brazil · On-site</p>
+                        <p class="experience-summary" data-i18n="experience.justice.summary">Assisted in operating systems training, data registration in monitoring tools (Power BI), spreadsheet management, and information insertion into proprietary databases.</p>
+                        <p class="experience-skills" data-i18n="experience.justice.skills">Skills: SQL, MySQL, Power BI, Data Entry, Operating Systems.</p>
                     </div>
                     <div class="experience-card" data-aos="fade-up" data-aos-delay="400">
                         <i class="fa-solid fa-scroll experience-icon"></i>
-                        <h3>Administration Intern</h3>
-                        <p class="experience-company">Federal Senate · Internship</p>
-                        <p class="experience-period">Dec 2020 - Aug 2022 · 1 year 9 months</p>
-                        <p class="experience-location">Brasília, Federal District, Brazil · Hybrid</p>
-                        <p class="experience-summary">Managed contracts, drafted, reviewed, and controlled documentation. Process management, client information registration, various registrations, and generated spreadsheets, reports, and graphics.</p>
-                        <p class="experience-skills">Skills: Microsoft Office, Administration, Contract Management, Process Management, Data Analysis.</p>
+                        <h3 data-i18n="experience.senate.role">Administration Intern</h3>
+                        <p class="experience-company" data-i18n="experience.senate.company">Federal Senate · Internship</p>
+                        <p class="experience-period" data-i18n="experience.senate.period">Dec 2020 - Aug 2022 · 1 year 9 months</p>
+                        <p class="experience-location" data-i18n="experience.senate.location">Brasília, Federal District, Brazil · Hybrid</p>
+                        <p class="experience-summary" data-i18n="experience.senate.summary">Managed contracts, drafted, reviewed, and controlled documentation. Responsibilities included process management, client information registration, various administrative registrations, and generating spreadsheets, reports, and graphics.</p>
+                        <p class="experience-skills" data-i18n="experience.senate.skills">Skills: Microsoft Office, Administration, Contract Management, Process Management, Data Analysis.</p>
                     </div>
-                </div></div></section><section class="certificates" id="certificates">
+                </div>
+            </div>
+        </section>
+
+        <section class="certificates" id="certificates">
             <div class="interface">
-                <h2 class="titulo" data-aos="fade-down">MY <span>CERTIFICATES!</span></h2>
-                <p class="section-intro-text" data-aos="fade-up" data-aos-delay="100">
-                    Here are some of my certifications. For a complete overview, please check my LinkedIn profile: 
-                    <a href="https://www.linkedin.com/in/felipeit4lo/details/certifications/" target="_blank" class="linkedin-cert-link">View Full Certifications</a>
+                <h2 class="titulo" data-i18n="certificates.title" data-aos="fade-down">MY <span>CERTIFICATES!</span></h2>
+                <p class="section-intro-text" data-i18n="certificates.intro" data-aos="fade-up" data-aos-delay="100">
+                    Here are some of my certifications. For a complete overview, please check my LinkedIn profile:
+                    <a href="https://www.linkedin.com/in/felipeit4lo/details/certifications/" target="_blank" class="linkedin-cert-link" data-i18n="certificates.linkedInLink">View Full Certifications</a>
                 </p>
                 <div class="flex certificates-grid">
                     <div class="certificate-card" data-aos="fade-up" data-aos-delay="100">
                         <i class="fa-brands fa-java certificate-icon"></i>
-                        <h3>Java Programming Fundamentals</h3>
-                        <p>Issued by UDEMY.</p>
-                        <a href="https://www.udemy.com/certificate/UC-40a79d0a-6a5a-47e3-9199-1203b54292fd/" target="_blank" class="btn-view-cert">View Certificate</a>
+                        <h3 data-i18n="certificates.javaFundamentals.title">Java Programming Fundamentals</h3>
+                        <p data-i18n="certificates.javaFundamentals.issuer">Issued by UDEMY.</p>
+                        <a href="https://www.udemy.com/certificate/UC-40a79d0a-6a5a-47e3-9199-1203b54292fd/" target="_blank" class="btn-view-cert" data-i18n="certificates.viewCertificateButton">View Certificate</a>
                     </div>
                     <div class="certificate-card" data-aos="fade-up" data-aos-delay="200">
                         <i class="fa-solid fa-mug-hot certificate-icon"></i>
-                        <h3>Java Programming Masterclass</h3>
-                        <p>Issued by UDEMY.</p>
-                        <a href="https://www.udemy.com/certificate/UC-482169f8-9915-4a04-804b-af6679909c99/" target="_blank" class="btn-view-cert">View Certificate</a>
+                        <h3 data-i18n="certificates.javaMasterclass.title">Java Programming Masterclass</h3>
+                        <p data-i18n="certificates.javaMasterclass.issuer">Issued by UDEMY.</p>
+                        <a href="https://www.udemy.com/certificate/UC-482169f8-9915-4a04-804b-af6679909c99/" target="_blank" class="btn-view-cert" data-i18n="certificates.viewCertificateButton">View Certificate</a>
                     </div>
                     <div class="certificate-card" data-aos="fade-up" data-aos-delay="300">
                         <i class="fa-solid fa-database certificate-icon"></i>
-                        <h3>Oracle Cloud Infrastructure</h3>
-                        <p>Issued by ORACLE.</p>
-                        <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=BA7889DFF04AEB4157731BED2E0BDA769715C9F8C6048C32F3ACFC259BA5AF83" target="_blank" class="btn-view-cert">View Certificate</a>
+                        <h3 data-i18n="certificates.oracleCloud.title">Oracle Cloud Infrastructure</h3>
+                        <p data-i18n="certificates.oracleCloud.issuer">Issued by ORACLE.</p>
+                        <a href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=BA7889DFF04AEB4157731BED2E0BDA769715C9F8C6048C32F3ACFC259BA5AF83" target="_blank" class="btn-view-cert" data-i18n="certificates.viewCertificateButton">View Certificate</a>
                     </div>
                     <div class="certificate-card" data-aos="fade-up" data-aos-delay="400">
                         <i class="fa-solid fa-language certificate-icon"></i>
-                        <h3>Advanced English (C1)</h3>
-                        <p>Issued by EF SET.</p>
-                        <a href="https://cert.efset.org/fg3zx1" target="_blank" class="btn-view-cert">View Certificate</a>
+                        <h3 data-i18n="certificates.advancedEnglish.title">Advanced English (C1)</h3>
+                        <p data-i18n="certificates.advancedEnglish.issuer">Issued by EF SET.</p>
+                        <a href="https://cert.efset.org/fg3zx1" target="_blank" class="btn-view-cert" data-i18n="certificates.viewCertificateButton">View Certificate</a>
                     </div>
                      <div class="certificate-card" data-aos="fade-up" data-aos-delay="500">
-                        <i class="fa-solid fa-laptop-code certificate-icon"></i>
-                        <h3>Web Development Basics</h3>
-                        <p>Issued by UDEMY.</p>
-                        <a href="https://www.udemy.com/certificate/UC-a2469156-9925-483b-a59a-55f3311dc73d/" target="_blank" class="btn-view-cert">View Certificate</a>
+                        <i class="fa-solid fa-code certificate-icon"></i> <h3 data-i18n="certificates.webDevBasics.title">Web Development Basics</h3>
+                        <p data-i18n="certificates.webDevBasics.issuer">Issued by UDEMY.</p>
+                        <a href="https://www.udemy.com/certificate/UC-a2469156-9925-483b-a59a-55f3311dc73d/" target="_blank" class="btn-view-cert" data-i18n="certificates.viewCertificateButton">View Certificate</a>
                     </div>
-                </div></div></section><section class="education" id="education">
+                </div>
+            </div>
+        </section>
+
+        <section class="education" id="education">
             <div class="interface">
-                <h2 class="titulo" data-aos="fade-down">MY <span>EDUCATION!</span></h2>
-                <div class="flex education-grid">
-                    <div class="education-card" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fa-solid fa-graduation-cap education-icon"></i>
-                        <h3>Universidade Paulista (UNIP)</h3>
-                        <p class="education-degree">Associate's Degree, Analysis and Systems Development</p>
-                        <p class="education-period">Sep 2022 - Dec 2024</p>
-                        <p class="education-note">Grade: 10</p>
-                        <p class="education-description">Graduated in Analysis and Systems Development.</p>
-                        <p class="education-skills">Skills: Database, Software Development, Object-Oriented Programming (OOP), Web Development.</p>
-                    </div>
+                <h2 class="titulo" data-i18n="education.title" data-aos="fade-down">MY <span>EDUCATION!</span></h2>
+                 <div class="flex education-grid">
                     <div class="education-card" data-aos="fade-up" data-aos-delay="200">
                         <i class="fa-solid fa-building-columns education-icon"></i>
-                        <h3>Federal Institute of Brasilia - IFB</h3>
-                        <p class="education-degree">Technologist, Public Management</p>
-                        <p class="education-period">Feb 2020 - Aug 2022</p>
-                        <p class="education-note">Grade: 10</p>
-                        <p class="education-description">Graduated in Public Management.</p>
-                        <p class="education-skills">Skills: Logistics, Human Resources (HR), Communication, Administration, Research.</p>
+                        <h3 data-i18n="education.ifb.name">Federal Institute of Brasilia - IFB</h3>
+                        <p class="education-degree" data-i18n="education.ifb.degree">Technologist, Public Management</p>
+                        <p class="education-period" data-i18n="education.ifb.period">Feb 2020 - Aug 2022</p>
+                        <p class="education-note" data-i18n="education.ifb.status">Status: Complete</p>
+                        <p class="education-description" data-i18n="education.ifb.desc">Graduated with a Technologist degree in Public Management, focusing on administrative and public sector operations.</p>
+                        <p class="education-skills" data-i18n="education.ifb.skills">Skills: Logistics, Human Resources (HR), Communication, Administration, Research.</p>
+                    </div>
+                    <div class="education-card" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fa-solid fa-laptop-file education-icon"></i>
+                        <h3 data-i18n="education.unip.name">University Paulista (UNIP)</h3>
+                        <p class="education-degree" data-i18n="education.unip.degree">Associate's Degree, Analysis and Systems Development</p>
+                        <p class="education-period" data-i18n="education.unip.period">Sep 2022 - Dec 2024</p>
+                        <p class="education-note" data-i18n="education.unip.status">Status: Complete</p>
+                        <p class="education-description" data-i18n="education.unip.desc">Graduated with an Associate's Degree in Analysis and Systems Development, building foundational knowledge in software design and implementation.</p>
+                        <p class="education-skills" data-i18n="education.unip.skills">Skills: Database Management, Software Development Life Cycle (SDLC), Object-Oriented Programming (OOP), Web Development.</p>
                     </div>
                     <div class="education-card" data-aos="fade-up" data-aos-delay="300">
-                        <i class="fa-solid fa-laptop-code education-icon"></i>
-                        <h3>University Cruzeiro do Sul</h3>
-                        <p class="education-degree">Bachelor's Degree, Computer Science</p>
-                        <p class="education-period">Jan 2024 - Dec 2027</p>
-                        <p class="education-note">Grade: 10</p>
-                        <p class="education-description">Bachelor's Degree in Computer Science.</p>
-                        <p class="education-skills">Skills: Programming, Object-Oriented Programming (OOP), Program Development.</p>
+                        <i class="fa-solid fa-graduation-cap education-icon"></i>
+                        <h3 data-i18n="education.cruzeiro.name">University Cruzeiro do Sul</h3>
+                        <p class="education-degree" data-i18n="education.cruzeiro.degree">Bachelor's Degree, Computer Science</p>
+                        <p class="education-period" data-i18n="education.cruzeiro.period">Jan 2024 - Dec 2027</p>
+                        <p class="education-note" data-i18n="education.cruzeiro.status">Status: In Progress (Expected Completion: December 2027)</p>
+                        <p class="education-description" data-i18n="education.cruzeiro.desc">Currently pursuing a Bachelor's Degree in Computer Science, deepening expertise in advanced programming concepts and computer systems.</p>
+                        <p class="education-skills" data-i18n="education.cruzeiro.skills">Skills: Advanced Programming Concepts, Object-Oriented Programming (OOP), Algorithm Design, Software Engineering.</p>
                     </div>
-                </div></div></section><section class="portfolio" id="projects">
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio" id="projects">
             <div class="interface">
-                <h2 class="titulo" data-aos="fade-down">MY <span>PROJECTS!</span></h2>
+                <h2 class="titulo" data-i18n="projects.title" data-aos="fade-down">MY <span>PROJECTS!</span></h2>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <div class="img-port" style="background-image: url(images/snake_game.jpg);">
-                                <div class="overlay">Snake Game</div>
+                                <div class="overlay" data-i18n="projects.snakeGame">Snake Game</div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-port" style="background-image: url(images/calculatorjs.jpg);">
-                                <div class="overlay">Calculator JS</div>
+                                <div class="overlay" data-i18n="projects.calculatorJS">Calculator JS</div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-port" style="background-image: url(images/programa_C.jpg);">
-                                <div class="overlay">Program in C</div>
+                                <div class="overlay" data-i18n="projects.cProgram">C Program</div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-port" style="background-image: url(images/programapy.png);">
-                                <div class="overlay">Python Financial</div>
+                                <div class="overlay" data-i18n="projects.pythonFinancialApp">Python Financial App</div>
                             </div>
                         </div>
                         <div class="swiper-slide">
                             <div class="img-port" style="background-image: url(images/pythonnotebook.png);">
-                                <div class="overlay">Project Jupyther</div>
+                                <div class="overlay" data-i18n="projects.jupyterProject">Jupyter Project</div>
                             </div>
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
-                </div></div></section><section class="contactme" id="contact">
+                </div>
+            </div>
+        </section>
+
+        <section class="contactme" id="contact">
             <div class="interface">
-                <h2 class="titulo" data-aos="fade-down">TALK<span> TO ME!</span></h2>
+                <h2 class="titulo" data-i18n="contact.title">TALK<span> TO ME!</span></h2>
                 <form action="mailto:felipeipp_91@hotmail.com" method="post" enctype="text/plain" data-aos="fade-up" data-aos-duration="1200">
-                    <input type="text" name="Name" placeholder="Name:" required>
-                    <input type="email" name="Email" placeholder="Email:" required>
-                    <input type="tel" name="Phone" placeholder="Phone: (Optional)">
-                    <textarea name="Message" cols="30" rows="10" placeholder="Your message" required></textarea>
-                    <div class="btn-send"><input type="submit" value="SEND"></div>
+                    <input type="text" name="Name" data-i18n-placeholder="contact.namePlaceholder" placeholder="Name:" required>
+                    <span class="validation-error" aria-live="polite"></span>
+                    <input type="email" name="Email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="Email:" required>
+                    <span class="validation-error" aria-live="polite"></span>
+                    <input type="tel" name="Phone" data-i18n-placeholder="contact.phonePlaceholder" placeholder="Phone: (Optional)">
+                    <span class="validation-error" aria-live="polite"></span>
+                    <textarea name="Message" cols="30" rows="10" data-i18n-placeholder="contact.messagePlaceholder" placeholder="Your message" required></textarea>
+                    <span class="validation-error" aria-live="polite"></span>
+                    <div class="btn-send"><input type="submit" data-i18n-value="contact.sendButton" value="SEND"></div>
                 </form>
             </div>
         </section>
@@ -290,16 +355,24 @@
                 <div class="flex footer-content">
                     <div class="logo-footer">
                         <img src="images/f-logo.png" alt="Felipe Italo Footer Logo">
-                    </div><div class="social-icons-footer">
-                        <a href="https://www.instagram.com/felipe_it4lo/" target="_blank" class="footer-social-icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://github.com/FelipeIt4lo" target="_blank" class="footer-social-icon"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/felipeit4lo/" target="_blank" class="footer-social-icon"><i class="fa-brands fa-linkedin"></i></a>
-                    </div></div></div><div class="line-footer borda">
+                    </div>
+                    <div class="social-icons-footer">
+                        <a href="https://www.instagram.com/felipe_it4lo/" target="_blank" class="footer-social-icon" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://github.com/FelipeIt4lo" target="_blank" class="footer-social-icon" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/felipeit4lo/" target="_blank" class="footer-social-icon" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="line-footer borda">
                 <p class="footer-email"><i class="bi bi-envelope-at-fill"></i> <a href="mailto:felipeipp_91@hotmail.com">felipeipp_91@hotmail.com</a></p>
-            </div></div></footer>
+                <p class="footer-rights"><i class="fa-regular fa-copyright"></i> <span class="footer-text-normal" data-i18n="footer.rights">All Rights Reserved Felipe Italo</span></p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="src/js/script.js" defer></script>
+    
+    <script src="src/js/script.js"></script>
 </body>
 </html>
