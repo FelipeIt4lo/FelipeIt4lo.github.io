@@ -94,8 +94,8 @@ const resources = {
                 title: "Learn more about who Felipe is and his passion for programming<span>!</span>",
                 subtitle:
                     "Welcome to my portfolio! I designed this website to share my journey, skills, and experience in the programming job market. I hope you enjoy what I've developed. I'm always open to suggestions for improvements and will keep this portfolio updated!",
-                cvPt: "See my CV (PT)",
-                cvEng: "See my CV (ENG)",
+                cvPt: "Veja meu CV (PT)", // Texto para o botão do CV em Português quando o site estiver em Inglês
+                cvEng: "See my CV (ENG)", // Texto para o botão do CV em Inglês quando o site estiver em Inglês
             },
             about: {
                 title: "Nice to meet you,<span> I'm Felipe Ítalo!</span>",
@@ -230,21 +230,21 @@ const resources = {
                 jupyterProject: "Jupyter Project",
             },
             contact: {
-                title: "TALK<span> TO ME!</span>",
+                title: "CONTACT<span> ME!</span>",
                 namePlaceholder: "Name:",
                 emailPlaceholder: "Email:",
                 phonePlaceholder: "Phone: (Optional)",
                 messagePlaceholder: "Your message",
                 sendButton: "SEND",
                 validation: {
-                    // Mensagens de validação
+                    // Validation messages
                     name: "Please enter your name.",
                     emailRequired: "Please enter your email.",
                     emailValid: "Please enter a valid email address.",
                     message: "Please enter your message.",
-                    phone: "Please enter a valid phone number (min 10 digits).",
+                    phone: "Please enter a valid phone number (min. 10 digits).",
                 },
-                submissionSuccess: "Form submitted successfully!", // Mensagem de sucesso
+                submissionSuccess: "Form submitted successfully!", // Success message
             },
             footer: {
                 rights: "All Rights Reserved Felipe Italo",
@@ -269,8 +269,8 @@ const resources = {
                 title: "Saiba mais sobre Felipe e sua paixão por programação<span>!</span>",
                 subtitle:
                     "Bem-vindo ao meu portfólio! Criei este site com o intuito de que todos que o acessem saibam um pouco mais sobre minha história, habilidades e, claro, um pouco sobre minha personalidade e experiência no mercado de trabalho de programação. Espero que goste do que desenvolvi e estou aberto a sugestões de melhorias para o meu portfólio, estarei sempre atualizando!",
-                cvPt: "Veja meu CV (PT)",
-                cvEng: "Veja meu CV (ENG)",
+                cvPt: "Veja meu CV (PT)", // Texto para o botão do CV em Português quando o site estiver em Português
+                cvEng: "See my CV (ENG)", // Texto para o botão do CV em Inglês quando o site estiver em Português
             },
             about: {
                 title: "Prazer em te conhecer,<span> sou Felipe Ítalo!</span>",
@@ -401,7 +401,7 @@ const resources = {
                 snakeGame: "Jogo da Cobra",
                 calculatorJS: "Calculadora JS",
                 cProgram: "Programa em C",
-                pythonFinancialApp: "Aplicativo Financeiro Python",
+                pythonFinancialApp: "App Financeiro Python",
                 jupyterProject: "Projeto Jupyter",
             },
             contact: {
@@ -727,64 +727,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Typewriter Effect in Hero Section ---
     const typingElement = document.querySelector(".txt-top-site h1");
-    let charIndex = 0;
-    const typingSpeed = 70;
-    const deleteSpeed = 30;
-    const delayBetweenTexts = 1500;
+    // Removed old typewriter effect variables and functions.
 
-    function typeWriterEffect() {
-        const textToType = translateText("hero.title"); // Usando nossa função de tradução
-        if (!typingElement || !textToType) return;
-
-        if (charIndex < textToType.length) {
-            const remainingText = textToType.substring(charIndex);
-            const spanStart = remainingText.indexOf("<span");
-            const spanEnd = remainingText.indexOf("</span>");
-
-            if (spanStart === 0) {
-                const tagContent = remainingText.substring(
-                    0,
-                    spanEnd + "</span>".length
-                );
-                typingElement.innerHTML += tagContent;
-                charIndex += tagContent.length;
-            } else {
-                typingElement.innerHTML += textToType.charAt(charIndex);
-                charIndex++;
-            }
-            setTimeout(typeWriterEffect, typingSpeed);
-        } else {
-            setTimeout(eraseText, delayBetweenTexts);
-        }
-    }
-
-    function eraseText() {
-        const textToType = translateText("hero.title"); // Usando nossa função de tradução
-        if (!typingElement || !textToType) return;
-
-        if (charIndex > 0) {
-            const currentDisplayedText = textToType.substring(0, charIndex);
-            const lastSpanStart = currentDisplayedText.lastIndexOf("<span");
-            const lastSpanEnd = currentDisplayedText.lastIndexOf("</span>");
-
-            if (
-                lastSpanEnd !== -1 &&
-                lastSpanEnd === charIndex - "</span>".length
-            ) {
-                charIndex = lastSpanStart;
-                typingElement.innerHTML = textToType.substring(0, charIndex);
-            } else {
-                typingElement.innerHTML = textToType.substring(
-                    0,
-                    charIndex - 1
-                );
-                charIndex--;
-            }
-            setTimeout(eraseText, deleteSpeed);
-        } else {
-            typingElement.innerHTML = "";
-            charIndex = 0;
-            setTimeout(typeWriterEffect, typingSpeed);
+    // New animation for hero title
+    function animateHeroTitle() {
+        if (typingElement) {
+            typingElement.innerHTML = translateText("hero.title"); // Ensure text is correct for current language
+            setTimeout(() => {
+                typingElement.classList.add("fade-in-up");
+            }, 100); // Small delay to ensure CSS transition applies
         }
     }
 
@@ -909,6 +860,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
+            // Apenas para H1 e H2 que podem conter spans para estilos, use innerHTML
             if (
                 (element.tagName === "H2" || element.tagName === "H1") &&
                 translatedText.includes("<span>")
@@ -965,6 +917,15 @@ document.addEventListener("DOMContentLoaded", () => {
             currentLangTextElement.textContent = currentLanguage.toUpperCase();
         }
         document.documentElement.lang = currentLanguage.split("-")[0]; // Atualiza o atributo lang do <html>
+
+        // Re-trigger the hero title animation after language change
+        if (typingElement) {
+            typingElement.classList.remove("fade-in-up"); // Remove class to re-trigger
+            // Small timeout to allow the class to be removed before adding again
+            setTimeout(() => {
+                animateHeroTitle();
+            }, 50);
+        }
     }
 
     // --- Lógica do Botão de Idioma ---
@@ -1012,11 +973,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Reinicia o efeito de digitação com o novo idioma
                 if (typingElement) {
+                    typingElement.classList.remove("fade-in-up"); // Remove a classe para resetar a animação
+                    // Pequeno atraso para garantir que a classe seja removida antes de adicionar novamente
                     setTimeout(() => {
-                        typingElement.innerHTML = "";
-                        charIndex = 0;
-                        typeWriterEffect();
-                    }, 100);
+                        animateHeroTitle();
+                    }, 50);
                 }
                 langSelector.classList.remove("active"); // Fecha o dropdown
             });
@@ -1030,12 +991,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Aplica traduções iniciais ao carregar a página
     applyTranslationsToDOM();
 
-    // Inicia o efeito de digitação após um pequeno atraso, para garantir que o DOM esteja pronto e as traduções aplicadas
+    // Inicia o novo efeito de animação para o título do herói
     if (typingElement) {
-        setTimeout(() => {
-            typingElement.innerHTML = "";
-            charIndex = 0;
-            typeWriterEffect();
-        }, 500);
+        animateHeroTitle();
     }
 });
