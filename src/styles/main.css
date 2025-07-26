@@ -457,6 +457,14 @@ section.top-of-the-site {
     color: var(--text-light);
     font-weight: 700; /* Made title bolder */
     letter-spacing: 2px; /* Increased letter spacing for impact */
+    opacity: 0; /* Initially hidden for animation */
+    transform: translateY(20px); /* Initially moved down */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition */
+}
+
+.top-of-the-site .txt-top-site h1.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .top-of-the-site .txt-top-site h1 span {
@@ -530,12 +538,6 @@ section.skills .flex {
     filter: drop-shadow(
         0 0 5px var(--accent-blue)
     ); /* Added subtle icon glow */
-}
-
-.skills .skills-box h3 {
-    font-size: 1.6em;
-    margin: 10px 0 15px;
-    font-weight: 600;
 }
 
 .rowicon {
@@ -1223,11 +1225,12 @@ footer .logo-footer img {
 }
 .footer-email a {
     color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.2s ease;
+    text-decoration: none; /* Remove text-decoration */
+    transition: color 0.2s ease, text-shadow 0.2s ease; /* Adiciona transição para text-shadow */
 }
 footer .line-footer p a:hover {
-    color: var(--accent-blue);
+    color: var(--accent-blue); /* Cor no hover */
+    text-shadow: 0 0 5px rgba(56, 225, 255, 0.7); /* Sombra discreta no hover */
 }
 
 footer .line-footer {
