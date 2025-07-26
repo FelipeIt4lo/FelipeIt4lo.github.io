@@ -211,13 +211,14 @@ header nav.menu-desktop a:hover {
     padding-bottom: 5px;
 }
 
-/* Estilo para link de navegação ativo (Scroll Spy) */
+/* Estilo para link de navegação ativo (Scroll Spy) - Corrigido para ser mais discreto */
 header nav.menu-desktop ul li a.active {
-    color: var(--accent-blue);
-    font-weight: 700;
-    border-bottom: 2px solid var(--accent-blue);
-    padding-bottom: 3px;
-    transform: translateY(0);
+    color: var(--accent-blue); /* Cor de destaque */
+    font-weight: 700; /* Negrito */
+    /* Removido border-bottom e padding-bottom para um efeito mais discreto */
+    /* Adicionando um box-shadow sutil como alternativa para o destaque visual */
+    text-shadow: 0 0 5px rgba(56, 225, 255, 0.7); /* Sombra de texto para brilho discreto */
+    transform: translateY(0); /* Mantém a posição original, sem "salto" */
 }
 
 /* ESTILO SELETOR DE IDIOMA */
@@ -1393,8 +1394,10 @@ footer .line-footer p .footer-text-normal {
     .about .txt-about p {
         text-align: center;
     }
-    .btn-social {
-        justify-content: center;
+    .btn-social button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
     }
 
     /* EXPERIENCE */
