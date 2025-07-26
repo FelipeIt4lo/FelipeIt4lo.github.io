@@ -24,6 +24,7 @@
     --card-hover-bg: #2b2b50; /* Fundo do card no hover */
     --border-subtle: rgba(56, 225, 255, 0.2); /* Borda sutil para elementos */
     --text-input-bg: #0f0f2f; /* Fundo dos inputs */
+    --error-color: #ff6b6b; /* Cor para mensagens de erro */
 }
 
 body {
@@ -35,7 +36,7 @@ body {
     background-color: var(--bg-main);
     color: var(--text-light);
     overflow-x: hidden;
-    cursor: auto; /* Mantém o cursor padrão */
+    cursor: auto; /* Mantém o cursor padrão, pois o cursor customizado foi removido */
 }
 
 body::before {
@@ -71,6 +72,7 @@ h2.titulo {
     margin-bottom: 50px;
     position: relative;
     padding-bottom: 10px;
+    letter-spacing: 1.5px; /* Adicionado para um visual mais profissional */
 }
 
 h2.titulo::after {
@@ -89,7 +91,7 @@ h2.titulo span {
 
 button:hover,
 form .btn-send input:hover {
-    box-shadow: 0px 0px 15px var(--accent-blue);
+    box-shadow: 0px 0px 18px var(--accent-blue); /* Levemente mais intenso */
     transform: scale(1.05);
     transition: all 0.3s ease;
 }
@@ -108,7 +110,7 @@ form .btn-send input {
     transition: all 0.3s ease;
     color: #000;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px; /* Aumentado o espaçamento para impacto */
 }
 
 .btn-group {
@@ -122,7 +124,7 @@ form .btn-send input {
 
 .btn-curriculo {
     text-align: center;
-    float: none;
+    float: none; /* Redundante com flex, mas ok */
     display: block;
     width: fit-content;
     margin: 0 auto;
@@ -137,29 +139,35 @@ header {
     background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
     box-shadow: 0 2px 10px var(--shadow-dark);
     backdrop-filter: blur(8px);
-    display: flex; /* Garante que o header seja um flex container */
-    align-items: center; /* Alinha itens verticalmente no centro */
-    justify-content: space-between; /* Espaço entre logo, menu e botão */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 header > .interface {
-    display: flex; /* Garante que os filhos diretos da interface no header sejam flex */
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Ocupa a largura total da interface */
+    width: 100%;
 }
 
-/* Ajuste específico para o botão de contato no cabeçalho */
+/* Container para ações do cabeçalho, incluindo seletor de idioma e botão de contato */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre o seletor de idioma e o botão de contato */
+    margin-left: auto; /* Empurra para a direita */
+}
+
 .btn-contato {
-    margin-left: auto; /* Empurra o botão para a direita */
-    display: block; /* Garante que ele seja visível */
-    align-self: center; /* Alinha ele no centro verticalmente */
-    flex-shrink: 0; /* Impede que o botão encolha */
+    display: block;
+    align-self: center;
+    flex-shrink: 0;
 }
 
 header .logo {
-    flex-shrink: 0; /* Impede que o logo encolha */
-    margin-right: 20px; /* Espaço entre logo e menu */
+    flex-shrink: 0;
+    margin-right: 20px;
 }
 
 header .logo img {
@@ -169,22 +177,22 @@ header .logo img {
 }
 
 header nav.menu-desktop {
-    flex-grow: 1; /* Permite que o menu ocupe o espaço disponível */
-    text-align: center; /* Centraliza o texto do menu no espaço flex */
+    flex-grow: 1;
+    text-align: center;
 }
 
 header nav ul {
     list-style-type: none;
-    display: flex; /* Transforma a lista de links em flex (para desktop) */
-    justify-content: center; /* Centraliza os itens da lista */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin: 0; /* Remove margens padrão da ul */
-    padding: 0; /* Remove paddings padrão da ul */
+    margin: 0;
+    padding: 0;
 }
 
 header nav.menu-desktop ul li {
-    display: inline-block; /* Mantido para compatibilidade, mas o flex já faz o trabalho */
-    padding: 0 20px; /* Reduzido um pouco o padding entre os itens */
+    display: inline-block;
+    padding: 0 20px;
 }
 
 header a {
@@ -194,7 +202,7 @@ header a {
     transition: all 0.2s ease;
     font-weight: 500;
     padding-bottom: 5px;
-    white-space: nowrap; /* Evita que o texto do link quebre a linha */
+    white-space: nowrap;
 }
 
 header nav.menu-desktop a:hover {
@@ -212,10 +220,88 @@ header nav.menu-desktop ul li a.active {
     transform: translateY(0);
 }
 
+/* ESTILO SELETOR DE IDIOMA */
+.lang-selector {
+    position: relative;
+    display: inline-block;
+    z-index: 1001; /* Aumentado o z-index para garantir visibilidade máxima */
+}
+
+.lang-button {
+    background-color: var(--card-bg-dark); /* Fundo escuro para o botão */
+    color: var(--text-light);
+    border: 1px solid var(--border-subtle);
+    padding: 10px 15px; /* Manter padding para bom espaçamento */
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+
+    /* CORREÇÃO DO BOTÃO "GORDO" / QUEBRA DE LINHA */
+    min-width: 90px; /* Garante que o botão tenha largura suficiente para PT-BR */
+    justify-content: center; /* Centraliza o ícone e o texto horizontalmente */
+    white-space: nowrap; /* Impede que o texto "PT-BR" quebre a linha */
+}
+
+.lang-button:hover {
+    background-color: var(--card-hover-bg);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(56, 225, 255, 0.4);
+}
+
+.lang-button i {
+    color: var(--accent-blue); /* Ícones com a cor de destaque */
+}
+
+.lang-dropdown-content {
+    display: none; /* Oculto por padrão */
+    position: absolute;
+    background-color: var(--card-bg-dark);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.6);
+    z-index: 1002; /* Maior que o lang-selector para garantir que esteja acima */
+    border-radius: 8px;
+    overflow: hidden;
+
+    /* Alinhamento Centralizado */
+    left: 50%; /* Move o ponto de referência para o centro do pai */
+    transform: translateX(
+        -50%
+    ); /* Move o elemento de volta pela metade de sua largura */
+
+    top: calc(
+        100% + 10px
+    ); /* Posiciona abaixo do botão com um pequeno espaço */
+    border: 1px solid var(--border-subtle);
+}
+
+.lang-dropdown-content a {
+    color: var(--text-light);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Evita que o texto quebre a linha */
+}
+
+.lang-dropdown-content a:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
+    transform: none; /* Garante que links do dropdown não tenham o translateY */
+}
+
+.lang-selector.active .lang-dropdown-content {
+    display: block !important; /* Força a exibição para debug do clique */
+}
+
 /* ESTILO MENU MOBILE */
 .btn-open-menu {
-    /* Display padrão será 'block' em media query para mobile */
-    display: none; /* Escondido por padrão em desktop */
+    display: none;
 }
 .btn-open-menu i {
     color: var(--accent-blue);
@@ -260,28 +346,27 @@ header nav.menu-desktop ul li a.active {
 }
 
 .menu-mobile nav ul {
-    /* MUDANÇA CRUCIAL AQUI: Faz os itens ficarem verticais */
-    list-style-type: none; /* Garante que não tenha marcadores de lista */
-    display: flex; /* Ativa o flexbox */
-    flex-direction: column; /* ITENS FICAM UM ABAIXO DO OUTRO */
-    align-items: flex-end; /* Alinha os itens à direita no menu mobile */
-    text-align: right; /* Alinha o texto à direita */
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
     padding-top: 50px;
-    margin: 0; /* Remove margens padrão */
-    padding-right: 8%; /* Ajusta padding para o texto não colar na borda */
+    margin: 0;
+    padding-right: 8%;
 }
 
 .menu-mobile nav ul li {
-    width: 100%; /* Faz com que cada item ocupe a largura total disponível */
-    margin-bottom: 10px; /* Espaço entre os itens */
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .menu-mobile nav ul li a {
     color: var(--text-light);
     font-size: 1.2em;
     font-weight: 300;
-    padding: 10px 0; /* Ajusta padding para os itens verticais */
-    display: block; /* Ocupa a largura total do li */
+    padding: 10px 0;
+    display: block;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -294,7 +379,7 @@ header nav.menu-desktop ul li a.active {
 .menu-mobile nav ul li a.active {
     background-color: var(--accent-blue);
     color: var(--bg-main);
-    padding-bottom: 10px; /* Mantém o padding consistente */
+    padding-bottom: 10px;
 }
 
 .overlay-menu {
@@ -328,7 +413,7 @@ section.top-of-the-site {
 }
 
 .overlay-hero {
-    background-color: rgba(0, 0, 0, 0.75); /* Overlay mais opaco */
+    background-color: rgba(0, 0, 0, 0.75);
     position: absolute;
     top: 0;
     left: 0;
@@ -370,6 +455,8 @@ section.top-of-the-site {
     line-height: 1.1;
     margin-bottom: 20px;
     color: var(--text-light);
+    font-weight: 700; /* Made title bolder */
+    letter-spacing: 2px; /* Increased letter spacing for impact */
 }
 
 .top-of-the-site .txt-top-site h1 span {
@@ -382,6 +469,7 @@ section.top-of-the-site {
     margin: 20px auto 0;
     color: var(--text-mid);
     text-align: center;
+    font-weight: 300; /* Lighter weight for paragraphs */
 }
 
 main section:first-of-type {
@@ -400,6 +488,7 @@ section.skills {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 section.skills .flex {
@@ -428,7 +517,8 @@ section.skills .flex {
 
 .skills .skills-box:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 10px 30px var(--shadow-light);
+    box-shadow: 0px 10px 30px var(--shadow-light),
+        0 0 25px 5px rgba(56, 225, 255, 0.3); /* Enhanced hover glow */
     background-color: var(--card-hover-bg);
     border-color: var(--accent-blue);
 }
@@ -437,6 +527,9 @@ section.skills .flex {
     font-size: 4.5em;
     color: var(--accent-blue);
     margin-bottom: 20px;
+    filter: drop-shadow(
+        0 0 5px var(--accent-blue)
+    ); /* Added subtle icon glow */
 }
 
 .skills .skills-box h3 {
@@ -471,6 +564,7 @@ section.experience {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 .experience-grid {
@@ -491,22 +585,26 @@ section.experience {
     min-width: 300px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinha texto à esquerda dentro do card */
+    align-items: flex-start;
     text-align: left;
     border: 1px solid var(--border-subtle);
 }
 
 .experience-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 10px 30px var(--shadow-light);
+    box-shadow: 0px 10px 30px var(--shadow-light),
+        0 0 25px 5px rgba(56, 225, 255, 0.3); /* Enhanced hover glow */
     background-color: var(--card-hover-bg);
     border-color: var(--accent-blue);
 }
 
 .experience-icon {
-    font-size: 4em; /* Tamanho do ícone */
+    font-size: 4em;
     color: var(--accent-blue);
     margin-bottom: 15px;
+    filter: drop-shadow(
+        0 0 5px var(--accent-blue)
+    ); /* Added subtle icon glow */
 }
 
 .experience-card h3 {
@@ -540,7 +638,7 @@ section.experience {
 
 .experience-card .experience-skills {
     font-size: 0.85em;
-    color: var(--accent-blue); /* Cor de destaque para skills */
+    color: var(--accent-blue);
     font-weight: 500;
     margin-top: 10px;
 }
@@ -552,6 +650,7 @@ section.certificates {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 .certificates-grid {
@@ -589,7 +688,7 @@ section.certificates {
     border-radius: 15px;
     transition: all 0.3s ease;
     box-shadow: 0 5px 20px var(--shadow-dark);
-    flex-basis: calc(33.33% - 20px); /* 3 colunas em telas maiores */
+    flex-basis: calc(33.33% - 20px);
     max-width: 380px;
     min-width: 280px;
     display: flex;
@@ -601,15 +700,19 @@ section.certificates {
 
 .certificate-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 10px 30px var(--shadow-light);
+    box-shadow: 0px 10px 30px var(--shadow-light),
+        0 0 25px 5px rgba(56, 225, 255, 0.3); /* Enhanced hover glow */
     background-color: var(--card-hover-bg);
     border-color: var(--accent-blue);
 }
 
 .certificate-icon {
-    font-size: 5em; /* Tamanho do ícone */
+    font-size: 5em;
     color: var(--accent-blue);
     margin-bottom: 20px;
+    filter: drop-shadow(
+        0 0 5px var(--accent-blue)
+    ); /* Added subtle icon glow */
 }
 
 .certificate-card h3 {
@@ -641,7 +744,7 @@ section.certificates {
 }
 
 .btn-view-cert:hover {
-    box-shadow: 0px 0px 15px var(--accent-blue);
+    box-shadow: 0px 0px 18px var(--accent-blue); /* Levemente mais intenso */
     transform: scale(1.05);
 }
 
@@ -652,6 +755,7 @@ section.education {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 .education-grid {
@@ -679,15 +783,19 @@ section.education {
 
 .education-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0px 10px 30px var(--shadow-light);
+    box-shadow: 0px 10px 30px var(--shadow-light),
+        0 0 25px 5px rgba(56, 225, 255, 0.3); /* Enhanced hover glow */
     background-color: var(--card-hover-bg);
     border-color: var(--accent-blue);
 }
 
 .education-icon {
-    font-size: 5em; /* Tamanho do ícone */
+    font-size: 5em;
     color: var(--accent-blue);
     margin-bottom: 20px;
+    filter: drop-shadow(
+        0 0 5px var(--accent-blue)
+    ); /* Added subtle icon glow */
 }
 
 .education-card h3 {
@@ -700,7 +808,7 @@ section.education {
     font-size: 0.9em;
     line-height: 1.5;
     color: var(--text-mid);
-    margin-bottom: 10px; /* Espaço entre parágrafos */
+    margin-bottom: 10px;
 }
 
 .education-card .education-period,
@@ -713,7 +821,7 @@ section.education {
 .education-card .education-description {
     font-style: italic;
     margin-top: 5px;
-    color: var(--text-mid); /* Descrição da formação */
+    color: var(--text-mid);
 }
 
 .education-card .education-skills {
@@ -730,10 +838,10 @@ section.portfolio {
     margin-top: 50px;
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 section.portfolio .flex {
-    /* Esta classe é para esconder a estrutura antiga */
     display: none;
 }
 
@@ -752,7 +860,7 @@ section.portfolio .flex {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px; /* Espaço para a sombra/borda externa */
+    padding: 10px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -766,32 +874,26 @@ section.portfolio .flex {
 .img-port {
     width: 320px;
     height: 420px;
-    background-color: var(
-        --card-bg-dark
-    ); /* Fundo sólido para preencher a borda transparente da imagem */
+    background-color: var(--card-bg-dark);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    /* Transição para transform e box-shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease,
         border-color 0.3s ease;
     cursor: grab;
     border-radius: 20px;
     position: relative;
-    box-shadow: 0 8px 25px var(--shadow-dark); /* Sombra externa padrão sutil */
-    overflow: hidden; /* Mantemos overflow: hidden para cortar a imagem de fundo */
-    border: 4px solid transparent; /* Borda transparente inicial */
-    filter: none; /* Garante que não haja filter no estado normal */
+    box-shadow: 0 8px 25px var(--shadow-dark);
+    overflow: hidden;
+    border: 4px solid transparent;
+    filter: none;
 }
 
-/* Removido o pseudo-elemento ::after e sua lógica. */
-
 .img-port:hover {
-    transform: scale(1.03); /* Mantém o zoom sutil no próprio cartão */
-    box-shadow: 0 0 0 4px var(--accent-blue),
-        /* Borda sólida azul */ 0 0 20px 8px var(--accent-blue),
-        /* Brilho neon azul forte (glow) */ 0 12px 35px var(--shadow-dark); /* Sombra do cartão original */
-    border-color: transparent; /* Garante que a borda do outline nao apareca */
+    transform: scale(1.03);
+    box-shadow: 0 0 0 4px var(--accent-blue), 0 0 20px 8px var(--accent-blue),
+        0 12px 35px var(--shadow-dark);
+    border-color: transparent;
     filter: none;
 }
 
@@ -823,7 +925,7 @@ section.portfolio .flex {
 .swiper-pagination-bullet {
     background: var(--accent-blue);
     opacity: 0.6;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Added transform transition */
 }
 
 .swiper-pagination-bullet-active {
@@ -835,26 +937,25 @@ section.portfolio .flex {
 .swiper-button-prev,
 .swiper-button-next {
     color: var(--accent-blue);
-    background-color: transparent !important; /* FORÇA O FUNDO A SER TRANSPARENTE */
+    background-color: transparent !important;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Transição para filter */
     transition: filter 0.3s ease, background-color 0.3s ease;
     z-index: 10;
-    filter: drop-shadow(0 0 0 transparent); /* Inicia sem glow */
-    box-shadow: none; /* Garante que não haja box-shadow regular */
+    filter: drop-shadow(0 0 0 transparent);
+    box-shadow: none;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-    background-color: rgba(0, 0, 0, 0.3); /* Fundo sutil ao hover */
-    filter: drop_shadow(0 0 10px rgba(56, 225, 255, 0.8))
-        drop_shadow(0 0 20px rgba(56, 225, 255, 0.6)); /* Brilho mais espalhado para halo */
-    box-shadow: none; /* Garante que não haja box-shadow regular no hover das setas */
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 10px rgba(56, 225, 255, 0.8))
+        drop-shadow(0 0 20px rgba(56, 225, 255, 0.6));
+    box-shadow: none;
 }
 
 /* SOBRE MIM (ABOUT) */
@@ -864,6 +965,7 @@ section.about {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 section.about .flex {
@@ -901,6 +1003,7 @@ section.about .flex {
     line-height: 1.2;
     margin-bottom: 25px;
     text-align: left;
+    font-weight: 700; /* Made title bolder */
 }
 
 .about .txt-about h2 span {
@@ -914,6 +1017,7 @@ section.about .flex {
     font-size: 1.1em;
     line-height: 1.7;
     color: var(--text-mid);
+    font-weight: 300; /* Lighter weight for paragraphs */
 }
 
 .btn-social {
@@ -955,7 +1059,8 @@ section.about .flex {
 .btn-social .social-icon:hover {
     background-color: var(--card-hover-bg);
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(56, 225, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(56, 225, 255, 0.5),
+        0 0 20px 5px rgba(56, 225, 255, 0.4); /* Enhanced hover glow */
     border: none;
     text-decoration: none;
 }
@@ -968,6 +1073,7 @@ section.contactme {
     box-shadow: inset 0 0 20px var(--shadow-dark);
     border-radius: 15px;
     margin-bottom: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to section */
 }
 
 form {
@@ -1001,6 +1107,7 @@ form textarea {
 form input::placeholder,
 form textarea::placeholder {
     color: var(--text-mid);
+    opacity: 0.7; /* Make placeholder text a bit lighter */
 }
 
 form input:focus,
@@ -1029,6 +1136,21 @@ form .btn-send input {
     border: none;
 }
 
+/* Validation Error Style */
+.validation-error {
+    color: var(--error-color);
+    font-size: 0.85em;
+    margin-top: -10px; /* Pull it closer to the input */
+    margin-bottom: 5px;
+    display: none; /* Hidden by default, shown by JS */
+    text-align: left; /* Align error message to the left */
+    padding-left: 5px; /* Small padding */
+}
+form input:invalid:not(:placeholder-shown) + .validation-error,
+form textarea:invalid:not(:placeholder-shown) + .validation-error {
+    display: block; /* Show error for invalid inputs (if not empty placeholder) */
+}
+
 /* RODAPÉ (FOOTER) */
 footer {
     padding: 40px 4%;
@@ -1036,6 +1158,7 @@ footer {
     background-color: var(--bg-section);
     border-radius: 15px;
     margin-top: 50px;
+    border: 1px solid var(--border-subtle); /* Added border to footer */
 }
 
 footer .flex {
@@ -1049,7 +1172,6 @@ footer .logo-footer img {
     object-fit: contain;
 }
 
-/* Novo estilo para a div que contém os ícones sociais no rodapé */
 .social-icons-footer {
     display: flex;
     gap: 15px;
@@ -1057,33 +1179,42 @@ footer .logo-footer img {
     justify-content: center;
 }
 
-/* Novo estilo para cada ícone social no rodapé */
+/* Correção da cor dos ícones sociais do rodapé */
+/* Removendo :visited e focando em !important */
+.footer-social-icon i {
+    color: var(
+        --accent-blue
+    ) !important; /* Força a cor azul para todos os ícones */
+    font-size: 1em; /* Mantenha o tamanho do ícone */
+    line-height: 1;
+    vertical-align: middle;
+}
+/* Revertendo a cor do hover para os ícones, para que o background mude mas o ícone mantenha a cor ou inverta para black */
+.footer-social-icon:hover i {
+    color: var(
+        --bg-main
+    ) !important; /* Muda a cor do ícone para black no hover do botão */
+}
+
 .footer-social-icon {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     background-color: var(--card-bg-dark);
-    color: var(--accent-blue);
-    font-size: 1.3em;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px var(--shadow-dark);
+    border: 1px solid var(--border-subtle);
 }
 
 .footer-social-icon:hover {
     background-color: var(--accent-blue);
-    color: var(--bg-main);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(56, 225, 255, 0.4);
-}
-
-.footer-social-icon i {
-    font-size: 1em;
-    line-height: 1;
-    vertical-align: middle;
+    border-color: var(--accent-blue);
 }
 
 .footer-email {
@@ -1115,13 +1246,16 @@ footer .line-footer p i {
     margin-right: 8px;
 }
 
-footer .line-footer p a {
-    color: var(--text-light);
-    text-decoration: none;
-    transition: color 0.2s ease;
+footer .line-footer p .footer-text-normal {
+    /* Estilo para o texto de direitos autorais */
+    color: var(--text-light); /* Garante que a cor seja branca */
+    text-decoration: none; /* Remove sublinhado */
+    transition: none; /* Remove transições de hover */
 }
-footer .line-footer p a:hover {
-    color: var(--accent-blue);
+
+/* CUSTOM CURSOR - REMOVED */
+.custom-cursor {
+    display: none !important; /* Forces the custom cursor to be hidden */
 }
 
 /* RESPONSIVIDADE */
@@ -1144,21 +1278,59 @@ footer .line-footer p a:hover {
         display: none;
     }
     header .btn-contato {
-        /* Mantemos o botão visível em mobile */
         display: block;
-        margin-left: auto; /* Empurra para a direita */
+        margin-left: auto;
     }
     header {
         padding: 15px 4%;
-        justify-content: space-between; /* Ajusta para mobile para centralizar logo e menu-hamburguer */
+        justify-content: space-between;
     }
     .btn-open-menu {
-        display: block; /* Torna o botão de abrir menu visível no mobile */
-        margin-left: auto; /* Empurra para a direita */
+        display: block;
+        margin-left: auto;
     }
     header > .interface {
-        justify-content: space-between; /* Garante espaço entre logo e botão mobile */
+        justify-content: space-between;
     }
+
+    /* Ajustes para o seletor de idioma em mobile */
+    .header-actions {
+        gap: 10px; /* Reduz o espaço entre elementos */
+        margin-left: auto; /* Garante que fique à direita */
+    }
+
+    .lang-button {
+        padding: 8px 12px; /* Reduz o padding do botão em telas menores */
+        font-size: 0.9em;
+        /* Manter min-width para acomodar PT-BR em mobile também */
+        min-width: 80px;
+    }
+    .lang-button i {
+        font-size: 0.9em;
+    }
+
+    .lang-dropdown-content {
+        min-width: unset; /* Remove largura mínima em mobile */
+        width: 150px; /* Define uma largura específica ou 'auto' */
+        left: 50%; /* Tenta centralizar em mobile */
+        transform: translateX(
+            -50%
+        ); /* Garante que o centro do dropdown esteja no centro do pai */
+        top: calc(
+            100% + 10px
+        ); /* Posiciona abaixo do botão com um pequeno espaço */
+    }
+
+    .lang-dropdown-content a {
+        font-size: 0.9em;
+        padding: 10px 12px;
+    }
+
+    /* Em telas menores, o botão de contato pode ser ocultado ou ajustado.
+       Para este exemplo, vou manter ele visível, mas pode ser ajustado.
+    .btn-contato {
+        display: none;
+    } */
 
     /* TOPO DO SITE */
     section.top-of-the-site {
@@ -1173,8 +1345,7 @@ footer .line-footer p a:hover {
         font-size: 2.8em;
     }
     .top-of-the-site .txt-top-site p {
-        font-size: 1em;
-        margin: 15px auto 20px;
+        font-size: 0.9em;
     }
     .top-of-the-site .btn-group {
         gap: 10px;
@@ -1237,11 +1408,14 @@ footer .line-footer p a:hover {
     .experience-card .experience-location,
     .experience-card .experience-summary,
     .experience-card .experience-skills {
-        text-align: center; /* Centraliza o texto no card em mobile */
+        text-align: center;
     }
     .experience-card h3 {
         text-align: center;
         width: 100%;
+    }
+    .experience-icon {
+        align-self: center; /* Center icon in mobile view */
     }
 
     /* CERTIFICADOS */
