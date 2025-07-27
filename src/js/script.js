@@ -170,8 +170,9 @@ const resources = {
             },
             certificates: {
                 title: "MY <span>CERTIFICATES!</span>",
-                intro: "Here are some of my certifications. For a complete overview, please check my LinkedIn profile:",
-                linkedInLink: "View Full Certifications",
+                intro: `Here are some of my certifications. For a complete overview, please check my LinkedIn profile:
+                <a href="https://www.linkedin.com/in/felipeit4lo/details/certifications/" target="_blank" class="linkedin-cert-link">View Full Certifications</a>`,
+                linkedInLink: "View Full Certifications", // This key is not directly used for the link's text anymore
                 viewCertificateButton: "View Certificate",
                 javaFundamentals: {
                     title: "Java Programming Fundamentals",
@@ -345,8 +346,9 @@ const resources = {
             },
             certificates: {
                 title: "MEUS <span>CERTIFICADOS!</span>",
-                intro: "Aqui estão alguns dos meus certificados. Para uma visão completa, por favor, verifique meu perfil do LinkedIn:",
-                linkedInLink: "Ver Todos os Certificados",
+                intro: `Aqui estão alguns dos meus certificados. Para uma visão completa, por favor, verifique meu perfil do LinkedIn:
+                <a href="https://www.linkedin.com/in/felipeit4lo/details/certifications/" target="_blank" class="linkedin-cert-link">Ver Todos os Certificados</a>`,
+                linkedInLink: "Ver Todos os Certificados", // This key is not directly used for the link's text anymore
                 viewCertificateButton: "Ver Certificado",
                 javaFundamentals: {
                     title: "Fundamentos de Programação Java",
@@ -862,8 +864,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            // Apenas para H1 e H2 que podem conter spans para estilos, use innerHTML
-            if (
+            // MODIFIED PART: Handle HTML content within translated text
+            // If the element is a <p> tag and the translated text contains an <a> tag, use innerHTML
+            // Otherwise, apply as textContent for simpler text elements
+            if (element.tagName === "P" && translatedText.includes("<a")) {
+                element.innerHTML = translatedText;
+            } else if (
                 (element.tagName === "H2" || element.tagName === "H1") &&
                 translatedText.includes("<span>")
             ) {
