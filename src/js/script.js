@@ -210,7 +210,7 @@ const resources = {
                     period: "Sep 2022 - Dec 2024",
                     status: "Status: Complete",
                     desc: "Graduated with an Associate's Degree in Analysis and Systems Development, building foundational knowledge in software design and implementation.",
-                    skills: "Skills: Database Management, Software Development Life Cycle (SDLC), Object-Oriented Programming (OOP), Web Development.",
+                    skills: "Skills: Database, Software Development Life Cycle (SDLC), Object Oriented Programming (OOP), Web Development.",
                 },
                 cruzeiro: {
                     name: "University Cruzeiro do Sul",
@@ -222,20 +222,20 @@ const resources = {
                 },
             },
             projects: {
-                title: "MY <span>PROJECTS!</span>",
-                snakeGame: "Snake Game",
-                calculatorJS: "Calculator JS",
-                cProgram: "C Program",
+                title: "My <span>projects!</span>",
+                snakeGame: "Snake game",
+                calculatorJS: "JS calculator",
+                cProgram: "C program",
                 pythonFinancialApp: "Python Financial App",
-                jupyterProject: "Jupyter Project",
+                jupyterProject: "Jupyter project",
             },
             contact: {
-                title: "CONTACT<span> ME!</span>",
+                title: "TALK TO<span> ME!</span>",
                 namePlaceholder: "Name:",
-                emailPlaceholder: "Email:",
+                emailPlaceholder: "E-mail:",
                 phonePlaceholder: "Phone: (Optional)",
                 messagePlaceholder: "Your message",
-                sendButton: "SEND",
+                sendButton: "TO SEND",
                 validation: {
                     // Validation messages
                     name: "Please enter your name.",
@@ -398,7 +398,7 @@ const resources = {
             },
             projects: {
                 title: "MEUS <span>PROJETOS!</span>",
-                snakeGame: "Jogo da Cobra",
+                snakeGame: "Snake Game",
                 calculatorJS: "Calculadora JS",
                 cProgram: "Programa em C",
                 pythonFinancialApp: "App Financeiro Python",
@@ -740,8 +740,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- "Tilt" Effect on Skills and Project Cards (Simple with JS) ---
+    // Manteve o tilt effect, mas o desativaremos para os elementos de projeto
+    // onde o efeito de rolagem da imagem estará ativo.
     const tiltElements = document.querySelectorAll(
-        ".skills-box, .img-port, .experience-card, .certificate-card, .education-card"
+        ".skills-box, .experience-card, .certificate-card, .education-card" // Removido .img-port daqui
     );
 
     tiltElements.forEach((el) => {
@@ -995,4 +997,104 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typingElement) {
         animateHeroTitle();
     }
+
+    // --- NOVO CÓDIGO: Efeito de Rolagem de Imagem nos Projetos ---
+    const projectContainers = document.querySelectorAll(".img-port");
+
+    projectContainers.forEach((container) => {
+        const imgWrapper = container.querySelector(".project-image-wrapper");
+        const img = imgWrapper.querySelector("img");
+        let animationFrameId; // Para controlar o requestAnimationFrame
+
+        // Cache da imagem original para restaurar ao sair do hover
+        const originalSrc = img.src;
+        const fullImageSrc = container.getAttribute("data-full-image");
+
+        // Função para pré-carregar imagem de alta resolução
+        const preloadImage = (url) => {
+            return new Promise((resolve, reject) => {
+                const preloadedImg = new Image();
+                preloadedImg.src = url;
+                preloadedImg.onload = resolve;
+                preloadedImg.onerror = reject;
+            });
+        };
+
+        container.addEventListener("mouseenter", () => {
+            // Desativa o tilt effect para este container ao entrar no hover
+            container.style.transform = `scale(1.03)`; // Aplica o scale do hover
+            container.style.transition =
+                "transform 0.3s ease, box-shadow 0.3s ease"; // Mantém as transições de hover para o próprio container
+
+            // Garante que o overflow seja hidden para o wrapper da imagem
+            imgWrapper.style.overflow = "hidden";
+
+            // Troca a imagem para a de alta resolução (se houver e for diferente)
+            if (fullImageSrc && img.src !== fullImageSrc) {
+                preloadImage(fullImageSrc)
+                    .then(() => {
+                        img.src = fullImageSrc;
+                        // Pequeno delay para a imagem renderizar com a nova altura antes de calcular a rolagem
+                        setTimeout(() => {
+                            startScrolling();
+                        }, 50);
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao pré-carregar imagem:", error);
+                        startScrolling(); // Tenta rolar mesmo com a imagem original
+                    });
+            } else {
+                startScrolling();
+            }
+        });
+
+        container.addEventListener("mouseleave", () => {
+            stopScrolling();
+
+            // Volta para a imagem original se a fullImageSrc foi usada
+            if (fullImageSrc && img.src !== originalSrc) {
+                img.src = originalSrc;
+            }
+
+            // Reabilita o tilt effect e remove qualquer transform extra do container
+            container.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`; // Reseta o transform do tilt
+            container.style.transition =
+                "transform 0.3s ease, box-shadow 0.3s ease"; // Reabilita a transição original
+        });
+
+        // Função para iniciar a rolagem
+        const startScrolling = () => {
+            cancelAnimationFrame(animationFrameId); // Garante que qualquer animação anterior seja cancelada
+
+            if (img.offsetHeight > imgWrapper.offsetHeight) {
+                const scrollRange = img.offsetHeight - imgWrapper.offsetHeight;
+                const scrollDuration = 3000; // Milissegundos para a rolagem completa (3 segundos)
+
+                let startTime = null;
+
+                const animateScroll = (currentTime) => {
+                    if (!startTime) startTime = currentTime;
+                    const elapsedTime = currentTime - startTime;
+
+                    const progress = Math.min(elapsedTime / scrollDuration, 1); // Garante que o progresso não passe de 1
+                    const currentScroll = scrollRange * progress;
+
+                    img.style.transform = `translateY(-${currentScroll}px)`;
+
+                    if (progress < 1) {
+                        animationFrameId = requestAnimationFrame(animateScroll);
+                    }
+                };
+                animationFrameId = requestAnimationFrame(animateScroll);
+            }
+        };
+
+        // Função para parar a rolagem e resetar a posição
+        const stopScrolling = () => {
+            cancelAnimationFrame(animationFrameId);
+            img.style.transition = "transform 0.5s ease-out"; // Transição suave para o retorno
+            img.style.transform = "translateY(0)";
+        };
+    });
+    // --- FIM DO NOVO CÓDIGO ---
 });
