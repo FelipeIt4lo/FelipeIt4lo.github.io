@@ -836,7 +836,6 @@ section.education {
 /* PORTFÓLIO (PROJECTS) */
 section.portfolio {
     padding: 80px 4%;
-    box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.05);
     background-color: var(--bg-section);
     margin-top: 50px;
     border-radius: 15px;
@@ -845,7 +844,7 @@ section.portfolio {
 }
 
 section.portfolio .flex {
-    display: none;
+    display: none; /* Mantém oculto se não for usado para a grade */
 }
 
 /* Estilos do Swiper Container */
@@ -881,23 +880,51 @@ section.portfolio .flex {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    transition: transform 0.3s ease, box-shadow 0.3s ease,
-        border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Removido border-color */
     cursor: grab;
     border-radius: 20px;
     position: relative;
-    box-shadow: 0 8px 25px var(--shadow-dark);
-    overflow: hidden;
-    border: 4px solid transparent;
-    filter: none;
+    box-shadow: 0 0 0 0 transparent; /* Nenhuma borda ou sombra inicial */
+    overflow: hidden; /* Mantido aqui para garantir que o wrapper da imagem respeite */
+}
+
+/* NOVO: Wrapper para a imagem real dentro do .img-port */
+.img-port .project-image-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px; /* Mesma borda do pai */
+    overflow: hidden; /* APLICADO AQUI para o scroll da imagem */
+    position: relative;
+    display: flex; /* Para centralizar a imagem verticalmente quando não rolar */
+    align-items: center;
+    justify-content: center;
+}
+
+.img-port .project-image-wrapper img {
+    width: 100%;
+    height: auto; /* Altura automática para manter proporção */
+    min-height: 100%; /* Garante que a imagem preencha a altura do wrapper */
+    display: block;
+    object-fit: cover;
+    object-position: top; /* Inicia a imagem no topo */
+    transition: transform 3s linear; /* Transição mais rápida para a rolagem */
+    will-change: transform;
 }
 
 .img-port:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 0 4px var(--accent-blue), 0 0 20px 8px var(--accent-blue),
-        0 12px 35px var(--shadow-dark);
-    border-color: transparent;
-    filter: none;
+    /* Ajustado box-shadow para o efeito neon, sem borda "cortada" */
+    box-shadow: 0 0 0 4px var(--accent-blue),
+        /* Borda fina */ 0 0 25px 10px rgba(56, 225, 255, 0.5),
+        /* Brilho interno */ 0 15px 40px var(--shadow-dark); /* Sombra para profundidade */
+    /* Removido border-color e filter: none; pois o box-shadow já faz a borda */
+}
+
+/* NOVO: Estado de hover para a imagem dentro do wrapper */
+.img-port:hover .project-image-wrapper img {
+    transform: translateY(
+        calc(100% - 100% / var(--image-scroll-factor))
+    ); /* Calcula o quanto deve rolar com base na altura da imagem vs wrapper */
 }
 
 .overlay {
@@ -909,19 +936,49 @@ section.portfolio .flex {
     background-color: rgba(0, 0, 0, 0.85);
     border-radius: 20px;
     display: flex;
+    flex-direction: column; /* Para empilhar o título e os botões */
     align-items: center;
     justify-content: center;
     font-size: 1.5em;
     font-weight: 700;
     color: var(--accent-blue);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.1s ease-in-out; /* Transição mais rápida */
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
     z-index: 6;
+    gap: 15px; /* Espaço entre o título e os botões */
 }
 
-.overlay:hover {
+/* O overlay só aparece no hover do .img-port */
+.img-port:hover .overlay {
     opacity: 1;
+}
+
+/* Estilos para os botões dentro do overlay */
+.overlay .project-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px; /* Espaçamento entre o título e os botões */
+}
+
+.overlay .project-links a {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: var(--accent-blue);
+    color: var(--bg-main);
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    white-space: nowrap; /* Evita que o texto quebre */
+}
+
+.overlay .project-links a:hover {
+    background-color: var(--card-hover-bg);
+    color: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(56, 225, 255, 0.7);
 }
 
 /* Estilos para a Paginação (bolinhas) e Navegação (setas) do Swiper */
