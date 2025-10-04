@@ -131,14 +131,23 @@ const resources = {
             },
             experience: {
                 title: "MY <span>EXPERIENCE!</span>",
-                ibm: {
+                "ibm-junior": {
+                    role: "Junior Developer",
+                    company: "IBM",
+                    period: "Sep 2025 - Present",
+                    location: "Remote",
+                    summary:
+                        "Continuing at IBM, I am currently working as a Junior Developer on a major project, where I handle various technologies such as Java, Oracle databases, GIT, the PL/SQL structured query language, and CLOUD, while also maintaining client applications.",
+                    skills: "Skills: Java, Oracle DB, GIT, PLSQL, CLOUD, Application Maintenance.",
+                },
+                "ibm-early": {
                     role: "Early Associate",
                     company: "IBM · Internship",
-                    period: "Feb 2024 - Present · 1 year 6 months",
+                    period: "Feb 2024 - Sep 2025 · 1 year 8 months",
                     location: "Brasília, Federal District, Brazil · Remote",
                     summary:
-                        "Currently an Application Developer at IBM, actively involved in a major project utilizing Java, SQL, QA/Tester methodologies, Bitbucket/Git for version control, PL/SQL, Oracle DB management, IT consulting, project management, and client application support.",
-                    skills: "Skills: Programming, Oracle SQL Developer, QA/Tester, Bitbucket/Git, IT Consulting, Project Management.",
+                        "Worked as a programming intern at IBM, gaining experience with PL/SQL, QA/Tester methodologies, Bitbucket/Git for version control, Java, Oracle DB management, IT consulting, project management, and client application support.",
+                    skills: "Skills: PL/SQL, QA/Tester, Bitbucket/Git, Java, Oracle DB, IT Consulting, Project Management.",
                 },
                 senac: {
                     role: "IT Intern",
@@ -212,14 +221,6 @@ const resources = {
                     status: "Status: Complete",
                     desc: "Graduated with an Associate's Degree in Analysis and Systems Development, building foundational knowledge in software design and implementation.",
                     skills: "Skills: Database, Software Development Life Cycle (SDLC), Object Oriented Programming (OOP), Web Development.",
-                },
-                cruzeiro: {
-                    name: "University Cruzeiro do Sul",
-                    degree: "Bachelor's Degree, Computer Science",
-                    period: "Jan 2024 - Dec 2027",
-                    status: "Status: In Progress (Expected Completion: December 2027)",
-                    desc: "Currently pursuing a Bachelor's Degree in Computer Science, deepening expertise in advanced programming concepts and computer systems.",
-                    skills: "Skills: Advanced Programming Concepts, Object-Oriented Programming (OOP), Algorithm Design, Software Engineering.",
                 },
             },
             projects: {
@@ -307,14 +308,23 @@ const resources = {
             },
             experience: {
                 title: "MINHA <span>EXPERIÊNCIA!</span>",
-                ibm: {
+                "ibm-junior": {
+                    role: "Desenvolvedor Junior",
+                    company: "IBM",
+                    period: "Set 2025 - Atualmente",
+                    location: "Remoto",
+                    summary:
+                        "Ainda na IBM, contínuo em um grande projeto atuando no cargo de desenvolvedor junior, onde mantenho o contato com diversas tecnologias como Java, banco de dados Oracle, GIT, linguagem de consulta estruturada PLSQL, CLOUD, e mantendo manutenção nas aplicações do cliente.",
+                    skills: "Habilidades: Java, Oracle DB, GIT, PLSQL, CLOUD, Manutenção de Aplicações.",
+                },
+                "ibm-early": {
                     role: "Early Associate",
                     company: "IBM · Estágio",
-                    period: "Fev 2024 - Atualmente · 1 ano 6 meses",
+                    period: "Fev 2024 - Set 2025 · 1 ano 8 meses",
                     location: "Brasília, Distrito Federal, Brasil · Remoto",
                     summary:
-                        "Atualmente, Desenvolvedor de Aplicações na IBM, envolvido em um grande projeto com Java, SQL, QA/Testador, Bitbucket/Git, PL/SQL, Oracle DB, consultoria de TI, gestão de projetos e suporte a aplicações de clientes.",
-                    skills: "Habilidades: Programação, Oracle SQL Developer, QA/Testador, Bitbucket/Git, Consultoria de TI, Gestão de Projetos.",
+                        "Atuei como estagiário de programação na IBM, tendo contato com PL/SQL, metodologias de QA/Tester, Bitbucket/Git para controle de versão, Java, gerenciamento de Oracle DB, consultoria de TI, gestão de projetos e suporte às aplicações do cliente.",
+                    skills: "Habilidades: PL/SQL, QA/Tester, Bitbucket/Git, Java, Oracle DB, Consultoria de TI, Gestão de Projetos.",
                 },
                 senac: {
                     role: "Estagiário de TI",
@@ -388,14 +398,6 @@ const resources = {
                     status: "Status: Concluído",
                     desc: "Graduado com título de Tecnólogo em Análise e Desenvolvimento de Sistemas, construindo conhecimento fundamental em design e implementação de software.",
                     skills: "Habilidades: Banco de Dados, Ciclo de Vida do Desenvolvimento de Software (SDLC), Programação Orientada a Objetos (POO), Desenvolvimento Web.",
-                },
-                cruzeiro: {
-                    name: "Universidade Cruzeiro do Sul",
-                    degree: "Bacharelado, Ciência da Computação",
-                    period: "Jan 2024 - Dez 2027",
-                    status: "Status: Em Andamento (Conclusão Prevista: Dezembro de 2027)",
-                    desc: "Atualmente cursando Bacharelado em Ciência da Computação, aprofundando conhecimentos em conceitos avançados de programação e sistemas computacionais.",
-                    skills: "Habilidades: Conceitos Avançados de Programação, Programação Orientada a Objetos (POO), Design de Algoritmos, Engenharia de Software.",
                 },
             },
             projects: {
