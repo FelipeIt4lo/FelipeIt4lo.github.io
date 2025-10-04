@@ -1125,6 +1125,23 @@ section.about .flex {
     text-decoration: none;
 }
 
+/* EFEITO DE LEVITAÇÃO PARA A FOTO */
+@keyframes levitate {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.about .img-about {
+    animation: levitate 2.5s ease-in-out infinite;
+}
+
 /* CONTATO */
 section.contactme {
     padding: 80px 4%;
