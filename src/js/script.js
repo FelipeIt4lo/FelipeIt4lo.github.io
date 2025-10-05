@@ -78,7 +78,7 @@
 const resources = {
     en: {
         translation: {
-            pageTitle: "Felipe Ítalo - Developer Portfolio",
+            pageTitle: "Felipe Ítalo - Portfolio",
             nav: {
                 home: "Home",
                 about: "About Me",
@@ -255,7 +255,7 @@ const resources = {
     },
     "pt-br": {
         translation: {
-            pageTitle: "Felipe Ítalo - Portfólio de Desenvolvedor",
+            pageTitle: "Felipe Ítalo - Portfólio",
             nav: {
                 home: "Início",
                 about: "Sobre Mim",
